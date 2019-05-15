@@ -14,7 +14,7 @@ public class MatchTest {
         String p="ababaca";
 
         StringMatcher finitiAutomator=new FinitiAutomator();
-        StringMatcher kmp=new KMP();
+        KMP kmp=new KMP();
 
 
         NaiveString naiveString=new NaiveString();
@@ -23,12 +23,17 @@ public class MatchTest {
         int[] pi=KMP.compute_prefix(t);
         for(int i :pi)
             System.out.print(i+"  ");
+        System.out.println();
 
-        int res=kmp.match(t,p);
-//    //    int res=finitiAutomator.match(t,p);
-////        int res=naiveString.match(t,p);
-//        //int res=rabinKarp.match(t,p);
-//
+        int[] next=KMP.getNext(t);
+        for (int j:next)
+            System.out.print(j+"  ");
+
+        int res= kmp.matchUsingNext(t,p);
+////    //    int res=finitiAutomator.match(t,p);
+//////        int res=naiveString.match(t,p);
+////        //int res=rabinKarp.match(t,p);
+////
         String result=res==-1?"match failed":String.format("match success ,the index begins at %s",res);
 
         System.out.println(result);
