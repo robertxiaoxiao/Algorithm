@@ -1,4 +1,4 @@
-package BasicDStructure;
+package BasicDStructure.Tree;
 
 public class TreeNode {
     public TreeNode right;

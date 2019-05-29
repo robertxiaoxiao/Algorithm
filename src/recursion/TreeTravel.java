@@ -1,5 +1,5 @@
 package recursion;
-import  BasicDStructure.TreeNode;
+import BasicDStructure.Tree.TreeNode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

@@ -1,6 +1,6 @@
 package LeetCode.Tree;
 
-import BasicDStructure.TreeNode;
+import BasicDStructure.Tree.TreeNode;
 
 public class q111 {
     public int minDepth(TreeNode root) {
