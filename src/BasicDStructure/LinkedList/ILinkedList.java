@@ -6,6 +6,7 @@ package BasicDStructure.LinkedList;
  */
 public class ILinkedList {
 
+    public  static Node curhead=null;
     private static class Node {
 
         public  int val;
@@ -109,6 +110,7 @@ public class ILinkedList {
         }
     }
 
+
     // 无头节点的翻转
     /*
      传入的是链表头节点
@@ -118,10 +120,13 @@ public class ILinkedList {
 
         Node pre=null;
         Node cur=p;
+
         Node temp=null;
         while(cur!=null)
         {
+            //下一个节点
             temp=cur.next;
+
             cur.next=pre;
             pre=cur;
             cur=temp;

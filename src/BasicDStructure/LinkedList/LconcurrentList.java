@@ -54,6 +54,7 @@ public class LconcurrentList {
         if (head.val == tail.val && head.val == val) {
             head = null;
             tail = null;
+            return;
         }
 
         //头节点
@@ -104,7 +105,22 @@ public class LconcurrentList {
         System.out.println(tail.val);
     }
 
+    public  boolean isEmpty(){
+
+        if(head==null&&tail==null)
+            return true;
+
+        return false;
+
+
+    }
+
     public static void main(String[] args) {
+        //TestConcu();
+        yussefu(10,4);
+    }
+
+    private static void TestConcu() {
         LconcurrentList lconcurrentList=new LconcurrentList();
 
         for(int i =0;i<10;i++) {
@@ -125,5 +141,27 @@ public class LconcurrentList {
         lconcurrentList.delete(9);
 
         lconcurrentList.print();
+    }
+
+    public static void yussefu(int n,int m){
+
+        LconcurrentList lconcurrentList=new LconcurrentList();
+        for(int i =0;i<n;i++)
+                lconcurrentList.insertToTail(new Node(i));
+
+        int count=0;
+        Node temp=lconcurrentList.head;
+        while(!lconcurrentList.isEmpty())
+        {
+             temp=temp.next;
+             count++;
+
+             if(count==m)
+             {
+                 System.out.println("current deque:"+temp.val);
+                 lconcurrentList.delete(temp.val);
+                 count=0;
+             }
+        }
     }
 }
