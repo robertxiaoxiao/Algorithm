@@ -161,6 +161,7 @@ public class LconcurrentList {
                  System.out.println("current deque:"+temp.val);
                  lconcurrentList.delete(temp.val);
                  count=0;
+
              }
         }
     }
