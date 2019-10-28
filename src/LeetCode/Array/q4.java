@@ -5,10 +5,13 @@ package LeetCode.Array;/*
  */
 
 
+import java.util.Queue;
 import java.util.concurrent.AbstractExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class q4 {
     public static void main(String[] args) {
+        Queue<Integer> queue =new LinkedBlockingQueue<>();
         int[] a = {1, 3, 4};
         int[] b = {2};
         System.out.println(findMedianSortedArrays(b, a));
