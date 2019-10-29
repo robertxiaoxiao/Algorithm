@@ -5,5 +5,8 @@ package BasicDStructure.Tree;/*
  */
 
 //  SegmentTree
+
 public class SegmentTree {
+
+
 }

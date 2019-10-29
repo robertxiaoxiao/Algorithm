@@ -16,7 +16,9 @@ t(s+1)=(d(t-hT[s+1])+T[s+m+1])mod q
 快速的启发式测试方法：  ts= p mod q
 java 中取模不等价%(取余符号，负数时无效)
 */
-public class RabinKarp implements     StringMatcher{
+
+// RK algorithm : map the n-m+1 segments of main string  to the Hash ; and nearby segment hash can be calculated by iterate ;
+public class RabinKarp implements  StringMatcher{
     @Override
     public int match(String T, String P) {
 
