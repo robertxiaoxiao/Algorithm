@@ -6,7 +6,6 @@ package Hook;/*
 public class TestHook {
 
     public static void main(String[] args) {
-
         HelloTask helloTask=new HelloTask() ;
         Component  component=new Component(helloTask) ;
         Listenner before=new Listenner("fzy") ;
