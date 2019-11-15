@@ -17,7 +17,7 @@ public class LinkedHashMap implements Iterator {
     int curSize = 0;
 
     //  threshold of lru
-    static int defaultMaxSize = 5;
+    static int defaultMaxSize = 15;
     static Iterator lhmiterator;
 
     private class lhashmapIterator implements Iterator {
@@ -166,7 +166,6 @@ public class LinkedHashMap implements Iterator {
         deleteFromHashtable(dnode);
         dnode = null;
     }
-
     /*
        to complete the delete structure in hashtable
      */
@@ -182,8 +181,8 @@ public class LinkedHashMap implements Iterator {
         Node lastread = cur;
 
         // delete head
-        if (cur.next == null && cur.key == dnode.key) {
-            hashtable[hashkey]=null;
+        if (cur.key == dnode.key) {
+            hashtable[hashkey]=cur.next;
             return;
         }
 
@@ -191,6 +190,7 @@ public class LinkedHashMap implements Iterator {
         while (cur != null) {
             if (cur.key == dnode.key) {
                 lastread.next = cur.next;
+                return ;
             }
             lastread = cur;
             cur = cur.next;
@@ -199,10 +199,9 @@ public class LinkedHashMap implements Iterator {
 
     private void deleteNodefromlist(Node keynode) {
         Node dnode = getNode(keynode.key);
-        if (dnode == null) {
-            System.out.format("current node  %d not exist\r\n", keynode.key);
+        if (dnode == null)
             return;
-        }
+
         Node before = dnode.before;
         Node after = dnode.after;
         before.after = after;
@@ -239,8 +238,8 @@ public class LinkedHashMap implements Iterator {
             hashtable[hashkey] = newnode;
         else
             lastnode.next = newnode;
-        addNodeTotail(newnode);
 
+        addNodeTotail(newnode);
         curSize++;
         while (curSize > defaultMaxSize)
             removeFromHead();
@@ -274,15 +273,15 @@ public class LinkedHashMap implements Iterator {
      */
     public static void main(String[] args) {
         LinkedHashMap lmap = new LinkedHashMap();
-        for (int i = 0; i <= 11; i++)
+        for (int i = 0; i <= 30; i++)
             lmap.put(i, i);
         lmap.print();
 
-        for (int i = 0; i <= 9; i++)
+        for (int i = 0; i <= 20; i++)
             lmap.get(i);
         lmap.print();
 
-        for (int i = 0; i < 11; i = i + 2)
+        for (int i = 0; i < 30; i = i + 2)
             lmap.remove(i);
         lmap.print();
     }
