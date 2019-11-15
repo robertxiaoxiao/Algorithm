@@ -4,12 +4,7 @@ package RelatedImpl;/*
  * @description:
  */
 
-import com.sun.xml.internal.ws.api.streaming.XMLStreamWriterFactory;
-import sun.plugin2.message.HeartbeatMessage;
-
-import java.util.HashMap;
 import java.util.Iterator;
-
 /*
     O(1) : ha
  */
@@ -19,12 +14,12 @@ public class LinkedHashMap implements Iterator {
     static Node[] hashtable;
     // recurrent head node
     Node head;
-    int curSize =0;
+    int curSize = 0;
 
     //  threshold of lru
-    static int defaultMaxSize =5;
-
+    static int defaultMaxSize = 5;
     static Iterator lhmiterator;
+
     private class lhashmapIterator implements Iterator {
 
         private Node lastreadNode;
@@ -105,6 +100,18 @@ public class LinkedHashMap implements Iterator {
         return null;
     }
 
+    Node getNode(int key) {
+        int hashkey = getHash(key);
+        Node cur = hashtable[hashkey];
+        while (cur != null) {
+            if (cur.key == key) {
+                return cur;
+            }
+            cur = cur.next;
+        }
+        return null;
+    }
+
     private void addNodeTotail(Node cur) {
         Node tail = head.before;
         if (tail == head) {
@@ -124,9 +131,9 @@ public class LinkedHashMap implements Iterator {
 
     private void moveNodeTotail(Node cur) {
         Node tail = head.before;
-        if (cur == tail)
+        if (cur == tail) {
             return;
-          /*
+        } /*
            delete from list
            */
         Node curnext = cur.after;
@@ -145,32 +152,61 @@ public class LinkedHashMap implements Iterator {
         Node found = get(key);
         if (found == null)
             return false;
-        deleteNodefromlist(found);
+        deleteNode(found);
         return true;
+    }
+
+    private void deleteNode(Node dnode) {
+        /*
+         it should remove from list and then remove from hashtable
+           because deletefromList will get the node using hashtable more quickly
+           than traversal from head
+          */
+        deleteNodefromlist(dnode);
+        deleteFromHashtable(dnode);
+        dnode = null;
     }
 
     /*
        to complete the delete structure in hashtable
      */
-    private void deleteFromHashtable(Node dnode){
-        int hashkey=dnode.hashkey;
-        Node cur=hashtable[hashkey];
-        Node lastread=null;
+    private void deleteFromHashtable(Node keynode) {
+        Node dnode = getNode(keynode.key);
+        if(dnode==null)
+            return;
+        int hashkey = dnode.hashkey;
+        Node cur = hashtable[hashkey];
+        if (cur == null)
+            return;
+        //  one node ,two node
+        Node lastread = cur;
+
+        // delete head
+        if (cur.next == null && cur.key == dnode.key) {
+            hashtable[hashkey]=null;
+            return;
+        }
+
+        // delete the node except head
         while (cur != null) {
-            if (cur.key == dnode.key&&lastread!=null) {
-                lastread.next=dnode.next;
+            if (cur.key == dnode.key) {
+                lastread.next = cur.next;
             }
-            lastread=cur;
+            lastread = cur;
             cur = cur.next;
         }
     }
-    private void deleteNodefromlist(Node dnode) {
 
+    private void deleteNodefromlist(Node keynode) {
+        Node dnode = getNode(keynode.key);
+        if (dnode == null) {
+            System.out.format("current node  %d not exist\r\n", keynode.key);
+            return;
+        }
         Node before = dnode.before;
         Node after = dnode.after;
         before.after = after;
         after.before = before;
-        dnode = null;
     }
 
     /*
@@ -198,24 +234,25 @@ public class LinkedHashMap implements Iterator {
             cur = cur.next;
         }
         // not existed in that table
-        Node newnode = new Node(key,val,hashkey);
-
+        Node newnode = new Node(key, val, hashkey);
         if (lastnode == null)
             hashtable[hashkey] = newnode;
         else
             lastnode.next = newnode;
         addNodeTotail(newnode);
+
         curSize++;
-        while(curSize>defaultMaxSize)
+        while (curSize > defaultMaxSize)
             removeFromHead();
     }
+
     /*
        it only be called when the size is bigger than the threshold,so the list cannot be empty(only head node)
      */
-    void removeFromHead(){
-         Node headFirst=head.after;
-         deleteNodefromlist(headFirst);
-         curSize--;
+    void removeFromHead() {
+        Node headFirst = head.after;
+        deleteNode(headFirst);
+        curSize--;
     }
 
     void print() {
@@ -236,20 +273,17 @@ public class LinkedHashMap implements Iterator {
        LRU  at the head : least recently used
      */
     public static void main(String[] args) {
-        LinkedHashMap map = new LinkedHashMap();
-        for (int i = 0; i <=11; i++)
-            map.put(i, i);
+        LinkedHashMap lmap = new LinkedHashMap();
+        for (int i = 0; i <= 11; i++)
+            lmap.put(i, i);
+        lmap.print();
 
-        map.print();
+        for (int i = 0; i <= 9; i++)
+            lmap.get(i);
+        lmap.print();
 
-        for (int i = 0; i <=11; i=i+3)
-           map.get(i);
-        map.print();
-
-//        for (int i = 0; i < 11; i = i + 3)
-//            map.remove(i);
-//        map.print();
+        for (int i = 0; i < 11; i = i + 2)
+            lmap.remove(i);
+        lmap.print();
     }
-
-
 }
