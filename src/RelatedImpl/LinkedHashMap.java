@@ -9,6 +9,7 @@ import java.util.Iterator;
     O(1) : ha
  */
 public class LinkedHashMap implements Iterator {
+
     //HashMap hm = new java.util.LinkedHashMap();
     static int defautlhashsize = 10;
     static Node[] hashtable;
@@ -72,6 +73,13 @@ public class LinkedHashMap implements Iterator {
             this.key = key;
             this.val = val;
             this.hashkey = hashkey;
+        }
+
+        public String toString(){
+            StringBuffer sb=new StringBuffer();
+            sb.append("(");
+            sb.append(key+","+val+")");
+            return sb.toString();
         }
     }
 
@@ -258,14 +266,9 @@ public class LinkedHashMap implements Iterator {
         System.out.println("curreent state :");
         Iterator it = getiter();
         while (it.hasNext()) {
-            print((Node) it.next());
-            System.out.print(" ");
+            System.out.print((it.next()).toString()+" ");
         }
         System.out.println();
-    }
-
-    void print(Node node) {
-        System.out.print("(" + node.key + "," + node.val + ")");
     }
 
     /*
