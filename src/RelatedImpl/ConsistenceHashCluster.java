@@ -4,11 +4,17 @@ package RelatedImpl;/*
  * @description:
  */
 
+
 /*
     ConsistenceHash algorithm implements and test
+
+    distributed file system
+
+    java
  */
 public class ConsistenceHashCluster {
     public static void main(String[] args) {
+
 
     }
 }
