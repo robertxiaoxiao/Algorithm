@@ -6,10 +6,7 @@ package leetcodeTest.Week3;/*
 
 import com.sun.deploy.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /*
             1  binaryserach
@@ -17,6 +14,21 @@ import java.util.List;
             3  BFS
  */
 public class q3 {
+    TrieNode root = null;
+    char STARTCHAR = 'a';
+
+    class TrieNode {
+        private char data;
+        private TrieNode[] children;
+        private int visitTime = 0;
+        public boolean isEndChar = false;
+
+        public TrieNode(char data) {
+            this.children = new TrieNode[26];
+            this.data = data;
+        }
+    }
+
     private static class trieNode {
         char C;
         trieNode[] next = new trieNode[26];
@@ -49,6 +61,49 @@ public class q3 {
             } else
                 return;
         }
+    }
+
+    public List<String> startWithNames(String prefix, int limit) {
+        ArrayList<String> res = new ArrayList<>();
+        char[] wordChar = prefix.toCharArray();
+        TrieNode p = root;
+        for (int i = 0; i < wordChar.length; ++i) {
+            int index = wordChar[i] - STARTCHAR;
+            if (p.children[index] == null) {
+                return res;
+            }
+            p = p.children[index];
+        }
+        findLimit(p, limit, new StringBuilder(prefix), res);
+        return res;
+    }
+
+    private void findLimit(TrieNode p, int limit, StringBuilder sb, ArrayList<String> tmp) {
+        if (tmp.size() >= limit) {
+            return;
+        }
+        if (p.isEndChar) {
+            tmp.add(sb.toString());
+        }
+        for (TrieNode child : p.children) {
+            if (child == null) {
+                continue;
+            }
+            sb.append(child.data);
+            findLimit(child, limit, sb, tmp);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
+    public List<List<String>> suggestedProductsUsingDFS(String[] products, String searchWord) {
+//        for (String p : products) {
+//            addWord(p);
+//        }
+        List<List<String>> res = new ArrayList<>();
+        for (int i = 0; i < searchWord.length(); i++) {
+            res.add(startWithNames(searchWord.substring(0, i + 1), 3));
+        }
+        return res;
     }
 
     public List<List<String>> suggestedProductsUsingTrieNode(String[] products, String searchWord) {
@@ -87,7 +142,6 @@ public class q3 {
             }
             res.add(temp);
         }
-
         return res;
     }
 

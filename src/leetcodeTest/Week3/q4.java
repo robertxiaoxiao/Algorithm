@@ -4,16 +4,18 @@ package leetcodeTest.Week3;/*
  * @description:
  */
 
+import java.util.Arrays;
+
 public class q4 {
     //dp[i][j]   i steps  j state
     static int mod = (int) (Math.pow(10, 9) + 7);
 
-/*
-We basically need arrays of array to track the dp states (count) for each step. However the dp states for step i+1
-only relates to dp states for step i. As a result, when it comes to step i+1, we can reuse the array for i-1 to track
- new dp states, which means we only need two arrays and use
- i%2 to determine which array is for current step and another one (i-1) %2 would be the previous step's states.
- */
+    /*
+    We basically need arrays of array to track the dp states (count) for each step. However the dp states for step i+1
+    only relates to dp states for step i. As a result, when it comes to step i+1, we can reuse the array for i-1 to track
+     new dp states, which means we only need two arrays and use
+     i%2 to determine which array is for current step and another one (i-1) %2 would be the previous step's states.
+     */
     public int numWaysAc(int steps, int arrLen) {
         int[] dp1 = new int[arrLen + 2], dp2 = new int[arrLen + 2];
         dp1[1] = 1;
@@ -41,18 +43,19 @@ only relates to dp states for step i. As a result, when it comes to step i+1, we
             for (int j = 0; j < len; j++) {
                 dp[i][j] = dp[i - 1][j];
                 if (j > 0)
-                    dp[i][j] = (dp[i][j]+dp[i - 1][j - 1]) % mod;
+                    dp[i][j] = (dp[i][j] + dp[i - 1][j - 1]) % mod;
                 if (j < len - 1)
-                    dp[i][j] = (dp[i][j]+dp[i - 1][j + 1]) % mod;
+                    dp[i][j] = (dp[i][j] + dp[i - 1][j + 1]) % mod;
             }
         return dp[steps][0];
     }
+
     public static void main(String[] args) {
-        int i=1;
 
-        System.out.println(i+=3%2);
-        System.out.println(i);
-
+        String[] res={"ab","abc","abd","abcd"} ;
+        Arrays.sort(res);
+        for(String word: res)
+            System.out.println(word);
 
     }
 }
