@@ -26,11 +26,11 @@ public class SegmentTree<E> {
     public E[] data;
     public E[] tree;
     private Merger<E> merger;
-    private  Merger<E> deMerger;
+    private Merger<E> deMerger;
 
-    public SegmentTree(E[] arr, Merger<E> merger,Merger<E> deMerger) {
+    public SegmentTree(E[] arr, Merger<E> merger, Merger<E> deMerger) {
         this.merger = merger;
-        this.deMerger=deMerger;
+        this.deMerger = deMerger;
         int n = arr.length;
         /*
          genericity initial
@@ -117,16 +117,17 @@ public class SegmentTree<E> {
         tree[rootNode] = merger.merge(tree[leftchild], tree[rightchild]);
     }
 
-    public void remove(int targetNode){
+    public void remove(int targetNode) {
         // empty
         // update(targetNode,0);
-        remove(0,targetNode,data[targetNode],0,data.length-1);
+        remove(0, targetNode, data[targetNode], 0, data.length - 1);
 
     }
-    public void remove(int rootNode,int targetNode,E val,int l,int r){
+
+    public void remove(int rootNode, int targetNode, E val, int l, int r) {
         if (l == r) {
             // targetNode in  treeNodeIndex
-            tree[rootNode]=deMerger.merge(tree[rootNode],val);
+            tree[rootNode] = deMerger.merge(tree[rootNode], val);
             return;
         }
         int mid = l + (r - l) / 2;
@@ -139,6 +140,7 @@ public class SegmentTree<E> {
             remove(rightchild, targetNode, val, mid + 1, r);
         tree[rootNode] = merger.merge(tree[leftchild], tree[rightchild]);
     }
+
     public void print() {
         int root = 0;
         Queue<Integer> queue = new ArrayDeque<>();
@@ -171,17 +173,19 @@ public class SegmentTree<E> {
             return a + b;
         }
     }
+
     public static class deleter implements Merger<Integer> {
         @Override
         public Integer merge(Integer a, Integer b) {
             return a - b;
         }
     }
+
     public static void main(String[] args) {
         Integer[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         Merger adder = new Add();
         Merger deleter = new deleter();
-        SegmentTree<Integer> segmentTree = new SegmentTree<Integer>(arr, adder,deleter);
+        SegmentTree<Integer> segmentTree = new SegmentTree<Integer>(arr, adder, deleter);
         segmentTree.print();
         int sum = 0;
         int l = 1, r = 6;

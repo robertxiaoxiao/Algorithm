@@ -5,6 +5,7 @@ package RelatedImpl;/*
  */
 
 import java.util.Iterator;
+
 /*
     O(1) : ha
  */
@@ -33,10 +34,8 @@ public class LinkedHashMap implements Iterator {
         public boolean hasNext() {
             if (head == null)
                 return false;
-
             if (lastreadNode.after == head)
                 return false;
-
             return true;
         }
 
@@ -75,10 +74,10 @@ public class LinkedHashMap implements Iterator {
             this.hashkey = hashkey;
         }
 
-        public String toString(){
-            StringBuffer sb=new StringBuffer();
+        public String toString() {
+            StringBuffer sb = new StringBuffer();
             sb.append("(");
-            sb.append(key+","+val+")");
+            sb.append(key + "," + val + ")");
             return sb.toString();
         }
     }
@@ -174,12 +173,13 @@ public class LinkedHashMap implements Iterator {
         deleteFromHashtable(dnode);
         dnode = null;
     }
+
     /*
        to complete the delete structure in hashtable
      */
     private void deleteFromHashtable(Node keynode) {
         Node dnode = getNode(keynode.key);
-        if(dnode==null)
+        if (dnode == null)
             return;
         int hashkey = dnode.hashkey;
         Node cur = hashtable[hashkey];
@@ -190,7 +190,7 @@ public class LinkedHashMap implements Iterator {
 
         // delete head
         if (cur.key == dnode.key) {
-            hashtable[hashkey]=cur.next;
+            hashtable[hashkey] = cur.next;
             return;
         }
 
@@ -198,7 +198,7 @@ public class LinkedHashMap implements Iterator {
         while (cur != null) {
             if (cur.key == dnode.key) {
                 lastread.next = cur.next;
-                return ;
+                return;
             }
             lastread = cur;
             cur = cur.next;
@@ -266,7 +266,7 @@ public class LinkedHashMap implements Iterator {
         System.out.println("curreent state :");
         Iterator it = getiter();
         while (it.hasNext()) {
-            System.out.print((it.next()).toString()+" ");
+            System.out.print((it.next()).toString() + " ");
         }
         System.out.println();
     }
