@@ -6,147 +6,119 @@ package leetcodeTest.Week2;/*
 
 import java.util.*;
 
+//  moving boxes in mineral step
 public class q4 {
 
-    public  static class Node {
-        int x, y;
-        int bx, by;
-        int minStep;
+    public static int[] dx = {-1, 1, 0, 0};
+    public static int[] dy = {0, 0, 1, -1};
 
-        public Node(int x, int y, int bx, int by,int minStep) {
-            this.x = x;
-            this.y = y;
+    public static class Node extends  Object {
+        int px, py;
+        int bx, by;
+        int minstep;
+
+        public Node(int px, int py, int bx, int by, int minstep) {
+            this.px = px;
+            this.py = py;
             this.bx = bx;
             this.by = by;
-            this.minStep =minStep;
+            this.minstep = minstep;
+        }
+        int key() {
+            return (px * 20 + py) << 16 | (bx + by);
         }
         // implements comparator
     }
 
-    int[] dx = {1, -1, 0, 0};
-    int[] dy = {0, 0, -1, +1};
-    public int minPushBox(char[][] grid) {
-
-        int n = grid.length;
+    public int minPushBox(char[][] arr) {
+        HashSet<Integer> seen = new HashSet<>();
+        HashMap<Integer, Integer> dist = new HashMap<>();
+        Queue<Node> queue = new ArrayDeque<>();
+        int n = arr.length;
         if (n == 0)
             return -1;
-        int m = grid[0].length;
-        int x = 0, y = 0, bx = 0, by = 0, tx = 0, ty = 0;
-        for (int i = 0; i < n; ++i)
-            for (int j = 0; j < m; ++j) {
-                if (grid[i][j] == 'S') {
-                    x = i;
-                    y = j;
+        int m = arr[0].length;
+        int px = 0;
+        int py = 0;
+        int bx = 0;
+        int by = 0;
+        int tx = 0;
+        int ty = 0;
+        int step = 0;
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++) {
+                if (arr[i][j] == 'S') {
+                    px = i;
+                    py = j;
                 }
-                if (grid[i][j] == 'B') {
+                if (arr[i][j] == 'B') {
                     bx = i;
                     by = j;
                 }
-                if (grid[i][j] == 'T') {
+                if (arr[i][j] == 'T') {
                     tx = i;
                     ty = j;
                 }
             }
-
-
-        HashMap<Node, Integer> dist = new LinkedHashMap<>();
-        HashMap<Node, Boolean> inque = new LinkedHashMap<>();
-        Queue<Node> queue = new PriorityQueue<>(new Comparator<Node>() {
-            @Override
-            public int compare(Node o1, Node o2) {
-                // ascend
-                return o1.minStep - o2.minStep;
-                // desccend
-                //return o2.minStep-o1.minStep ;
-            }
-        });
-
-        Node root = new Node(x, y, bx, by,0);
-        queue.add(root);
-        dist.put(root, 0);
-        inque.put(root,true) ;
-        int ans = -1;
+        Node start = new Node(px, py, bx, by, 0);
+        queue.add(start);
+        seen.add(start.key());
+        dist.put(start.key(), 0);
         while (!queue.isEmpty()) {
-            Node temp = queue.peek();
-            inque.put(temp,false);
-            queue.poll();
-            int curx = temp.x;
-            int cury = temp.y;
-            int curbx = temp.bx;
-            int curby = temp.by;
-            int curStep = dist.get(temp);
-            // whether move
-            int delte = 0;
-
-            if (temp.bx == tx && temp.by == ty) {
-                if (ans == -1 || ans > curStep)
-                    ans = curStep;
-                continue;
-            }
-
-            for (int i = 0; i < 4; i++) {
-                delte = 0;
-                int x0 = temp.x + dx[i];
-                int y0 = temp.y + dy[i];
-                int bx0 = curbx;
-                int by0 = curby;
-                if (x0 < 0 || x0 >= n || y0 < 0 || y0 >= m || grid[x0][y0] == '#')
-                    continue;
-
-                if (x0 == curbx && y0 == curby) {
-                    bx0 = curbx + dx[i];
-                    by0 = curby + dy[i];
-                    if (bx0 < 0 || bx0 >= n || by0 < 0 || by0 >= m || grid[bx0][by0] == '#')
+            int size = queue.size();
+            while (size > 0) {
+                Node temp = queue.poll();
+                // get the target
+                if (temp.bx == tx && temp.by == ty)
+                    return dist.get(temp.key());
+                size--;
+                for (int i = 0; i < 4; i++) {
+                    int cpx = temp.px + dx[i];
+                    int cpy = temp.py + dy[i];
+                    int curstep = temp.minstep;
+                    if (cpx < 0 || cpx > n || cpy < 0 || cpy > m || arr[cpx][cpy] == '#')
                         continue;
-                    delte = 1;
-                }
+                    int cbx = temp.bx;
+                    int cby = temp.by;
+                    if (cpx == temp.bx && cpy == temp.by) {
+                        cbx += dx[i];
+                        cby += dy[i];
+                        if (cbx < 0 || cbx > n || cby < 0 || cby > m || arr[cbx][cby] == '#')
+                            continue;
+                        curstep++;
+                    }
 
-                Node newnode = new Node(x0, y0, bx0, by0,curStep+delte);
-                if (!dist.containsKey(newnode) || dist.get(newnode) > curStep + delte) {
-                    dist.put(newnode, curStep + delte);
-                }
-                if(!inque.containsKey(newnode)) {
-                    inque.put(newnode,true);
-                    queue.offer(newnode) ;
+                    Node curnode = new Node(cpx, cpy, cbx, cby, curstep);
+                    if (!dist.containsKey(curnode.key()))
+                        dist.put(curnode.key(), curstep);
+                    else {
+                        int premin = dist.get(curnode.key());
+                        if (curstep<premin) {
+                            dist.put(curnode.key(), curstep);
+                        }
+                        curnode.minstep = dist.get(curnode.key());
+                    }
+
+                    if (!seen.contains(curnode.key())) {
+                        System.out.printf("%d %d %d %d %d ", curnode.bx, curnode.by, curnode.px, curnode.py, step);
+                        queue.add(curnode);
+                        seen.add(curnode.key());
+                    }
                 }
             }
         }
-        return ans;
+        return -1;
     }
+
     public static void main(String[] args) {
 
-        Node  temp=new Node(1,1,2,2,1);
-        Node  temp1=new Node(1,1,2,2,1);
-        HashMap<Node,Integer> hm= new HashMap<>();
-        hm.put(temp,1);
-        System.out.println(hm.containsKey(temp1));
-        hm.put(temp1,1) ;
-
-        Queue<Integer> queueAscend = new PriorityQueue<>();
-        Queue<Integer> queuedescend = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
-            }
-        });
-
-        for (int i = 0; i < 10; i++) {
-            queueAscend.add(i);
-            queuedescend.add(i);
-        }
-
-        Iterator it=queueAscend.iterator();
-        Iterator it1=queuedescend.iterator();
-
-        while(it.hasNext())
-            System.out.print(it.next()+"  ");
-
+        HashMap<Node, Integer> hm = new HashMap<>();
+        Node n1 = new Node(1, 1, 1, 1, 0);
+        Node n2 = new Node(1, 1, 1, 1, 0);
+        hm.put(n1, 1);
+        System.out.println(hm.get(n2));
+        hm.put(n2, 2);
         System.out.println();
-        while(it1.hasNext())
-            System.out.print(it1.next()+"  ");
-        }
 
-
-
-
+    }
 }
