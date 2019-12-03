@@ -110,7 +110,7 @@
 //        public void handle(HttpExchange exchange) throws IOException {
 //            String method = exchange.getRequestMethod();
 //            if ("GET".equals(method)) {
-//                sendResult(exchange, 0, "Server is ready.");
+//                sendResult(exchange, 0, "server is ready.");
 //            } else {
 //                String body = readAsString(exchange.getRequestBody(), StandardCharsets.UTF_8);
 //                if (!body.startsWith("code=")) {
