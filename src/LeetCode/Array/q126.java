@@ -4,8 +4,6 @@ package LeetCode.Array;/*
  * @description:
  */
 
-import sun.awt.image.ImageWatched;
-
 import javax.print.DocFlavor;
 import java.util.*;
 import java.util.concurrent.ThreadPoolExecutor;

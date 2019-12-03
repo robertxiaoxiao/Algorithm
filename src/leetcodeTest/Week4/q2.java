@@ -21,6 +21,5 @@ public class q2 {
         res.add(x1);
         res.add(x2);
         return res;
-
     }
 }
