@@ -5,8 +5,22 @@ package leetcodeTest.Week2;/*
  */
 
 import java.util.*;
-import java.util.function.Function;
 
+/*
+    NOTICE :
+    1 encode the object in Integer and judge whether it is contained in the collection
+    2 arr dir[] can be merged in one dimension
+    3 level traverse must be implemented  by that  way:
+                while(!queue.isempty())
+                {       size =queue.size();
+                        while(size>0)
+                           queue.pop();
+                        step++;
+                }
+   4  BFS goes into loop where the object must be initialized at inner loop , to avoid recalculating (repetitive computation)
+   5  A* algorithm must make it clear about  the heuristic function (manhattan method + history_steps)
+   6  BFS will get the most closest solution(it always refers to the min steps or the min cost )
+ */
 //  moving boxes in mineral step
 public class q4 {
 
@@ -41,6 +55,7 @@ public class q4 {
 
     public static int minPushBoxUsingPq(char[][] arr) {
         HashSet<Integer> seen = new HashSet<>();
+        //   ascending order
         PriorityQueue<Node> pq = new PriorityQueue<>(new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
@@ -96,7 +111,6 @@ public class q4 {
         return -1;
     }
 
-
     public static Node canpush(char[][] arr, Node curnode, int dx, int dy) {
 
         int cbx = curnode.bx;
@@ -115,39 +129,11 @@ public class q4 {
 
     public static boolean haspath(char[][] arr, Node curnode, int tx, int ty) {
         HashSet<Integer> hashSet = new HashSet<>();
-        return canarrive(arr, hashSet, curnode.bx, curnode.by, curnode.px, curnode.py, tx, ty);
+        boolean res = canarrive(arr, hashSet, curnode.bx, curnode.by, curnode.px, curnode.py, tx, ty);
+        if (res == false)
+            System.out.printf("%d %d %d %d %d %d", curnode.bx, curnode.by, curnode.px, curnode.py, tx, ty);
+        return res;
     }
-
-    public static boolean canarriveUsingBFS(char[][] arr, HashSet<Integer> nodes, int bx, int by, int nx, int ny, int tx, int ty) {
-        if (tx < 0 || tx >= arr.length || ty < 0 || ty >= arr[0].length || arr[tx][ty] == '#')
-            return false;
-        Queue<Integer> queue = new ArrayDeque<>();
-        int m = 20;
-        queue.add(nx * m + ny);
-        nodes.add(nx * m + ny);
-        while (!queue.isEmpty()) {
-            int temp = queue.peek();
-            queue.remove();
-            int curx = temp / m;
-            int cury = temp % m;
-            for (int i = 0; i < 4; i++) {
-                curx += dx[i];
-                cury += dy[i];
-                if (curx == bx && cury == by)
-                    continue;
-                if (curx == tx && cury == ty)
-                    return true;
-                if (nodes.contains(curx * m + cury))
-                    continue;
-                nodes.add(curx * m + cury);
-                if (curx < 0 || curx >= arr.length || cury < 0 || cury >= arr[0].length || arr[curx][cury] == '#')
-                    continue;
-                queue.add(curx * m + cury);
-            }
-        }
-        return false;
-    }
-
 
     public static boolean canarrive(char[][] arr, HashSet<Integer> nodes, int bx, int by, int nx, int ny, int tx, int ty) {
 
@@ -204,12 +190,6 @@ public class q4 {
             }
         Node curnode = new Node(px, py, bx, by);
         queue.add(curnode);
-//        PriorityQueue<Node>  pq=new PriorityQueue<>(new Comparator<Node>() {
-//            @Override
-//            public int compare(Node o1, Node o2) {
-//                return calmahhatten(o1,tx,ty)-calmahhatten();
-//            }
-//        });
         seen.add(curnode.key());
         int step = 0;
         while (!queue.isEmpty()) {
@@ -242,6 +222,41 @@ public class q4 {
         return -1;
     }
 
+    public static boolean canarriveUsingBFS(char[][] arr, HashSet<Integer> nodes, int bx, int by, int nx, int ny, int tx, int ty) {
+        if (tx < 0 || tx >= arr.length || ty < 0 || ty >= arr[0].length || arr[tx][ty] == '#')
+            return false;
+        Queue<Integer> queue = new ArrayDeque<>();
+        int m = 20;
+        queue.add(nx * m + ny);
+        nodes.add(nx * m + ny);
+        while (!queue.isEmpty()) {
+            int temp = queue.peek();
+            queue.remove();
+            for (int i = 0; i < 4; i++) {
+                // it must be calculated in loop
+                int curx = temp / m;
+                int cury = temp % m;
+                curx += dx[i];
+                cury += dy[i];
+                if (curx == bx && cury == by)
+                    continue;
+
+                if (curx == tx && cury == ty)
+                    return true;
+
+                if (nodes.contains(curx * m + cury))
+                    continue;
+
+                if (curx < 0 || curx >= arr.length || cury < 0 || cury >= arr[0].length || arr[curx][cury] == '#')
+                    continue;
+
+                nodes.add(curx * m + cury);
+                queue.add(curx * m + cury);
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
 
         HashMap<Node, Integer> hm = new HashMap<>();
@@ -251,6 +266,5 @@ public class q4 {
         System.out.println(hm.get(n2));
         hm.put(n2, 2);
         System.out.println();
-
     }
 }
