@@ -5,6 +5,7 @@ package leetcodeTest.Week2;/*
  */
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /*
     NOTICE :
@@ -26,8 +27,9 @@ public class q4 {
 
     public static int[] dx = {-1, 1, 0, 0};
     public static int[] dy = {0, 0, 1, -1};
+    public static int[] dz = {0, -1, 0, 1,0};
 
-    public static class Node extends Object {
+    public static class Node  {
         int px, py;
         int bx, by;
         int g, h;
@@ -41,6 +43,11 @@ public class q4 {
 
         int f() {
             return g + h;
+        }
+
+        @Override
+        public int hashCode() {
+            return 0;
         }
 
         int key() {
@@ -259,12 +266,7 @@ public class q4 {
 
     public static void main(String[] args) {
 
-        HashMap<Node, Integer> hm = new HashMap<>();
-        Node n1 = new Node(1, 1, 1, 1);
-        Node n2 = new Node(1, 1, 1, 1);
-        hm.put(n1, 1);
-        System.out.println(hm.get(n2));
-        hm.put(n2, 2);
-        System.out.println();
+        System.out.println(Integer.toBinaryString(2147483647));
+        System.out.println(0x7fffffff);
     }
 }

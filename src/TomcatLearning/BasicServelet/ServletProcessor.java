@@ -4,11 +4,8 @@ package TomcatLearning.BasicServelet;/*
  * @description:
  */
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import java.net.URLClassLoader;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class ServletProcessor {
     public void process(Request request, Response response) {

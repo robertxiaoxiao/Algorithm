@@ -58,7 +58,6 @@ public class q3 {
             return ans;
         Collections.sort(list1);
         Collections.sort(list2);
-
         if (ans % 3 == 1) {
             if (list1.size() >= 1)
                 ans = ans - list1.get(0);

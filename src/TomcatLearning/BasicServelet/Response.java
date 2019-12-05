@@ -4,14 +4,13 @@ package TomcatLearning.BasicServelet;/*
  * @description:
  */
 
-import javax.net.ssl.SSLSession;
 import javax.servlet.*;
 import java.io.*;
-import java.net.URI;
+
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
+
 
 public class Response implements ServletRequest {
     private OutputStream output;
@@ -59,9 +58,11 @@ public class Response implements ServletRequest {
         }
     }
 
-    public PrintWriter getWriter() {
+    public PrintWriter getWriter()  {
         writer = new PrintWriter(output, true);
+
         return writer;
+
     }
 
     @Override

@@ -4,6 +4,8 @@ package TomcatLearning.BasicServelet;/*
  * @description:
  */
 
+import org.apache.coyote.http11.Http11Processor;
+
 import javax.servlet.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +18,7 @@ import java.util.Map;
 public class Request  implements ServletRequest {
     private InputStream input;
     private String url;
+    Http11Processor http11Processor;
 
     public Request(InputStream input) {
         this.input = input;
