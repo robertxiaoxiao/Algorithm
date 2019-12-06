@@ -31,21 +31,90 @@ public class q84 {
         return maxarea;
     }
 
-    static class node {
-        int left;
-        int right;
+    static class Node {
         int minval;
-    }
+        int idx;
 
+        public Node(int idx, int val) {
+            this.idx = idx;
+            this.minval = val;
+        }
+
+        public Node(Node temp) {
+            if (temp != null) {
+                this.idx = temp.idx;
+                this.minval = temp.minval;
+            }
+        }
+
+    }
     static class SegmentTree {
 
+        int length;
+        Node[] data;
+        Node[] tree;
+
+        public SegmentTree(int[] arr) {
+            length = arr.length;
+            // 2^(log2n+1) UsualKey =4;
+            data = new Node[length];
+            tree = new Node[4 * length];
+            for (int i = 0; i < length; i++)
+                data[i] = new Node(i, arr[i]);
+            build(0, length - 1, 0);
+        }
+
+        public void build(int left, int right, int tr) {
+            if (left == right) {
+                tree[tr] = new Node(data[left]);
+                return;
+            }
+            int mid = left + (right - left) / 2;
+            build(left, mid, tr * 2 + 1);
+            build(mid + 1, right, tr * 2 + 2);
+            tree[tr] = new Node(tree[tr * 2 + 1].minval > tree[tr * 2 + 2].minval ? tree[tr * 2 + 2] : tree[tr * 2 + 1]);
+        }
+
+        public Node query(int left, int right) {
+            return query(left, right, 0, length - 1, 0);
+        }
+
+        public Node query(int left, int right, int curl, int curr, int tr) {
+            if (left == curl && right == curr)
+                return tree[tr];
+            //   if we want the idx ,we need to return  index ;
+            //   return tree[tr];
+            int mid = curl + (curr - curl) / 2;
+            if (right <= mid)
+                return query(left, right, curl, mid, tr * 2 + 1);
+            else if (left > mid)
+                return query(left, right, mid + 1, curr, tr * 2 + 2);
+            else {
+                //
+                Node leftnode = query(left, mid, curl, mid, tr * 2 + 1);
+                Node rightnode = query(mid + 1, right, mid + 1, curr, tr * 2 + 2);
+                return leftnode.minval > rightnode.minval ? rightnode : leftnode;
+                //  return Math.min(tree[query(left, mid, curl, mid, tr * 2 + 1)], tree[query(mid + 1, right, mid + 1, curr, tr * 2 + 2)]);
+            }
+        }
     }
 
     public static int largestRectangleAreaUsingSegmentTree(int[] heights) {
+        SegmentTree tree = new SegmentTree(heights);
+        return maxarea(heights, tree, 0, heights.length - 1);
+    }
 
-
-
-
+    public static int maxarea(int[] heights, SegmentTree tree, int left, int right) {
+        if (left > right)
+            return -1;
+        if (left == right)
+            return heights[left];
+        Node mid = tree.query(left, right, 0, heights.length - 1, 0);
+        int theight = heights[mid.idx];
+        int inheight = theight * (right - left + 1);
+        int leftarea = maxarea(heights, tree, left, mid.idx - 1);
+        int rightarea = maxarea(heights, tree, mid.idx + 1, right);
+        return Math.max(inheight, Math.max(leftarea, rightarea));
     }
 
 
@@ -155,8 +224,13 @@ public class q84 {
     }
 
     public static void main(String[] args) {
-        int[] arr = {2, 2, 2, 2};
-        System.out.println(largestRectangleAreaUsingStack(arr));
+        int[] arr = {1, 2, 3, 4};
+        SegmentTree tree = new SegmentTree(arr);
+        // tree.build(0,arr.length,0);
+//        System.out.println(tree.query(0, 2));
+//        System.out.println(tree.query(0, 3));
+//        System.out.println(tree.query(1, 2));
+        System.out.println(largestRectangleAreaUsingSegmentTree(arr));
     }
 
     public static void callessfromleft(int[] lessfromleft, int[] heights) {
