@@ -5,6 +5,8 @@ package TomcatLearning.BasicServelet;/*
  */
 
 import java.io.IOException;
+
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
@@ -24,10 +26,6 @@ public class Server {
         Server server = new Server();
         server.await();
         //TestSystemProperty();
-
-
-
-
 
     }
 

@@ -48,6 +48,7 @@ public class q84 {
         }
 
     }
+
     static class SegmentTree {
 
         int length;
@@ -117,13 +118,12 @@ public class q84 {
         return Math.max(inheight, Math.max(leftarea, rightarea));
     }
 
-
     public static int largestRectangleAreaUsingStack(int[] heights) {
         int n = heights.length;
-        int tp = 0;
+        int tp;
         int i = 0;
         int maxarea = 0;
-        int area_with_top = 0;
+        int area_with_top;
         Stack<Integer> stack = new Stack<>();
         while (i < n) {
             if (stack.isEmpty())

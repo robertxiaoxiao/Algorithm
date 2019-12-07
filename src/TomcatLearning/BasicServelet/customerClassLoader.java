@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class customerClassLoader extends ClassLoader {
-    public static final String WEB_ROOT = System.getProperty("user.dir") + System.getProperty("file.separator") + "WebServerRoot" + System.getProperty("file.separator");
+    private static final String WEB_ROOT = System.getProperty("user.dir") + System.getProperty("file.separator") + "WebServerRoot" + System.getProperty("file.separator");
 
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         try {
