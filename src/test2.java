@@ -6,7 +6,6 @@ public class test2 {
         int K = 1;
         int[] primeNums = new int[K];
         createPrimeArr(primeNums);
-
     }
 
     public  static void createPrimeArr(int[] nums){
