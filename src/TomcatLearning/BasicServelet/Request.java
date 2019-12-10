@@ -16,9 +16,12 @@ import java.util.Locale;
 import java.util.Map;
 
 public class Request  implements ServletRequest {
+
+
     private InputStream input;
     private String url;
     Http11Processor http11Processor;
+
 
     public Request(InputStream input) {
         this.input = input;

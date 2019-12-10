@@ -14,6 +14,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/*
+         1   processor connector  run
+         2   object reuse and  get object from pool
+ */
 public class Server {
 
     public static final String WEB_ROOT = System.getProperty("user.dir") + System.getProperty("file.separator") + "WebServerRoot";

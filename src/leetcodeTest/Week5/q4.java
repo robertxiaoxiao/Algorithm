@@ -4,11 +4,21 @@ package leetcodeTest.Week5;/*
  * @description:
  */
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
+
+import java.util.*;
 
 public class q4 {
+    public static void main(String[] args) {
+        String s = "abasdawe";
+        String s2 = new String("abasdawe");
+
+        System.out.println(s.hashCode() == s2.hashCode());
+
+        HashSet<String> hs = new HashSet<>();
+        hs.add(s);
+        System.out.println(hs.add(s2));
+        System.out.println(hs.size());
+    }
 
     public int minFlips(int[][] mat) {
         HashMap<Integer, Integer> minsteps = new HashMap<>();
@@ -72,13 +82,4 @@ public class q4 {
     }
 
 
-    public static void main(String[] args) {
-        int[][] mat = {{0, 0, 1}, {0, 0, 1}};
-
-//        System.out.println(0 & 1);
-//        System.out.println(0 | 1);
-//        System.out.println(0 ^ 1);
-//        System.out.println(1 ^ 1);
-
-    }
 }
