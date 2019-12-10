@@ -34,7 +34,6 @@ public class q676 {
         public MagicDictionary() {
             root = new treeNode('#');
         }
-
         /**
          * Build a dictionary through a list of words
          */
