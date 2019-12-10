@@ -31,6 +31,8 @@ public class q648 {
                 if (temp.childnodes[c - 'a'] == null)
                     temp.childnodes[c - 'a'] = new treeNode(c);
                 temp = temp.childnodes[c - 'a'];
+                if (temp.isend)
+                    return;
             }
             temp.isend = true;
         }
