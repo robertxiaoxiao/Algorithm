@@ -1,4 +1,4 @@
-package LeetCode.StockSpan;/*
+package LeetCode.StackSpan;/*
  * @author: Robert
  * @date:  2019/12/11/011
  * @description:
@@ -61,7 +61,8 @@ public class q907 {
         }
     }
 
-    public int sumSubarrayMins(int[] A) {
+    // BF using segmentTree
+    public int sumSubarrayMinsUsingSegmentTree(int[] A) {
         SegmentTree segmentTree = new SegmentTree(A);
         int size = segmentTree.tree.length;
         System.out.println(size);
@@ -72,5 +73,19 @@ public class q907 {
         }
         return -1;
     }
+
+    public int sumSubarrayMins(int[] A) {
+        int n = A.length;
+        int[] lessfromleft = StackUtil.PLN(A);
+        int[] lessfromright = StackUtil.NLNusingStack(A);
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            int left = i - lessfromleft[i];
+            int right = lessfromright[i] - i;
+            sum = (sum + A[i] * left * right ) % mod;
+        }
+        return sum;
+    }
+
 
 }
