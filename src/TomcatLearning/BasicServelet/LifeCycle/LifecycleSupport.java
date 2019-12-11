@@ -5,7 +5,8 @@ package TomcatLearning.BasicServelet.LifeCycle;
  * @description:
  */
 
-public class LifecycleSupport {
+//  help to manage listenerComponents
+public final class LifecycleSupport {
 
     public LifecycleSupport(Lifecycle lifecycle) {
         this.lifecycle = lifecycle;
@@ -32,6 +33,21 @@ public class LifecycleSupport {
         return listeners;
     }
 
+    public void fireLifecycleEvent(String type, Object data) {
+
+        LifecycleEvent Event =new LifecycleEvent(lifecycle,type,data);
+
+        LifecycleListener[] interested =null;
+        synchronized (listeners)
+        {
+             interested =listeners.clone();
+        }
+        for(LifecycleListener   listener :interested)
+        {
+            listener.lifecycleEvent(Event);
+        }
+    }
+
     public void removeListener(LifecycleListener listener) {
 
         int n = -1;
@@ -49,4 +65,6 @@ public class LifecycleSupport {
         }
         listeners = res;
     }
+
+
 }
