@@ -1,4 +1,4 @@
-package TomcatLearning.BasicServelet.LifeCycle;/*
+package TomcatLearning.LifeCycle;/*
  * @author: Robert
  * @date:  2019/12/11/011
  * @description:
@@ -46,17 +46,17 @@ public class Context implements Lifecycle {
 
     @Override
     public void start() throws LifecycleException {
-        System.out.println("start context");
+      //  System.out.println("start context");
+        lifecycleSupport.fireLifecycleEvent(Lifecycle.START_EVENT, null);
         for (Page page : pages) {
             page.start();
         }
-        lifecycleSupport.fireLifecycleEvent(Lifecycle.START_EVENT, null);
     }
 
 
     @Override
     public void stop() throws LifecycleException {
-        System.out.println("stop context");
+     //   System.out.println("stop context");
         for (Page page : pages) {
             page.stop();
         }

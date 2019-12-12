@@ -1,4 +1,4 @@
-package TomcatLearning.BasicServelet.LifeCycle;
+package TomcatLearning.LifeCycle;
 import org.apache.catalina.LifecycleException;
 
 public interface Lifecycle {

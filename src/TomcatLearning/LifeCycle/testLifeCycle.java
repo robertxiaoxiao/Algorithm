@@ -1,4 +1,4 @@
-package TomcatLearning.BasicServelet.LifeCycle;/*
+package TomcatLearning.LifeCycle;/*
  * @author: Robert
  * @date:  2019/12/11/011
  * @description:
@@ -10,8 +10,10 @@ public class testLifeCycle {
     public static void main(String[] args) throws LifecycleException {
         Context context = new Context();
         Page[] pages = new Page[10];
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++) {
             pages[i] = new Page(i + 1);
+            pages[i].addLifecycleListener(new PageListener(i + 1));
+        }
 
         context.addPages(pages);
         SimpleLifecycleListener simpleLifecycleListener = new SimpleLifecycleListener();
