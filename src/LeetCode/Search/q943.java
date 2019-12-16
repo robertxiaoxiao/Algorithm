@@ -139,6 +139,7 @@ public class q943 {
             sb.append(A[next].substring(A[next].length() - graph[temp][next]));
             temp = next;
         }
+        System.out.println("current string len is :"+min);
         return sb.toString();
     }
 
