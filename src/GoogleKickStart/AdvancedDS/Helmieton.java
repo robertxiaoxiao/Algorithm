@@ -5,4 +5,9 @@ package GoogleKickStart.AdvancedDS;/*
  */
 
 public class Helmieton {
+
+    int nodes;
+    int[][] cost;
+
+
 }
