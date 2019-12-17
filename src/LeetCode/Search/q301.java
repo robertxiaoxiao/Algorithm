@@ -18,7 +18,6 @@ public class q301 {
     }
 
     static int min = Integer.MAX_VALUE;
-
     // first find the essence and those agitators(infringement the rule )
     /*
        we first need to find the deleted number of Parentheses and then we search for all solution to find
