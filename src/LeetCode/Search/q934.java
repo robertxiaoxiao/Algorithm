@@ -6,7 +6,6 @@ package LeetCode.Search;/*
 
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class q934 {
@@ -85,7 +84,6 @@ public class q934 {
                     }
                 }
             }
-
             steps++;
         }
         return steps;
