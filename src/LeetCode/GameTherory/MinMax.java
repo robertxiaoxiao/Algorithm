@@ -63,9 +63,8 @@ public class MinMax {
     public int scoresDpCompress(int[] arr) {
 
         int n = arr.length;
-
         //dp[i][j] :  max relative scores between i and j
-        // dp[i] : start with i at curLen ,becasue
+        // dp[i] : start with i at curLen ,because
         // dp[i][j] =dp[i] ;dp[i+1][j] =dp[i+1] ,dp[i][j-1]=dp[i]
         // dp[i] =Math.max(dp[i+1],dp[i](previous dp[i]))
         int[] dp = new int[n];
