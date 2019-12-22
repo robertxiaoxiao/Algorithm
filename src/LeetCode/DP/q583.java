@@ -58,12 +58,9 @@ public class q583 {
         }
     }
 
-    public int memDp(String a,String b ,int m,int n,int[][] mem)
-    {
+    public int memDp(String a, String b, int m, int n, int[][] mem) {
 
-
-
-
+        return -1;
     }
 
 }
