@@ -39,6 +39,4 @@ public class q309 {
         return  Math.max(rest[n],sold[n]);
     }
 
-
-
 }

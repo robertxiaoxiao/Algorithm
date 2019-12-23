@@ -4,6 +4,8 @@ package LeetCode.DP;/*
  * @description:
  */
 
+import java.util.Arrays;
+
 public class q583 {
     public int minDistance(String word1, String word2) {
         //keep[i]
@@ -11,34 +13,33 @@ public class q583 {
     }
 
     public int minDistanceUsingdp(String a, String b) {
-        if (a.equalsIgnoreCase(b))
-            return 0;
-        if (a.length() == 0)
-            return b.length();
-        if (b.length() == 0)
-            return a.length();
+        int n = a.length();
+        int m = b.length();
+        int[][] mem = new int[n][m];
+        for (int i = 0; i < n; i++)
+            Arrays.fill(mem[i], Integer.MAX_VALUE);
+        return memDp(a, b, n - 1, m - 1, mem);
+    }
 
-        int lena = a.length();
-        int lenb = b.length();
-        // dp[i][j]  a[i,lena] b[j,lenb]
+    public int memDp(String a, String b, int i, int j, int[][] mem) {
 
-        // a[i-1] a[i]
-        // b[j-1] b[j]
-        int[][] dp = new int[lena + 1][lenb + 1];
-        for (int j = lenb - 1; j >= 0; j--)
-            dp[lena][j] = lenb - j - 1;
-        for (int j = lena - 1; j >= 0; j--)
-            dp[j][lenb] = lena - j - 1;
-        dp[lena][lenb] = 0;
-        for (int i = lena - 2; i >= 0; i--)
-            for (int j = lenb - 2; j >= 0; j--) {
-                if (a.charAt(i) == b.charAt(j))
-                    dp[i][j] = Math.min(Math.min(dp[i + 1][j] + 1, dp[i][j + 1] + 1), dp[i + 1][i + 1]);
-                else
-                    dp[i][j] = Math.min(dp[i + 1][j] + 1, dp[i][j + 1] + 1);
-            }
+        if (i == -1)
+            return j + 1;
 
-        return dp[0][0];
+        if (j == -1)
+            return i + 1;
+
+        if (mem[i][j] != Integer.MAX_VALUE)
+            return mem[i][j];
+
+        if (a.charAt(i) == b.charAt(j))
+            return mem[i][j] = backT(a, b, i - 1, j - 1);
+
+        int removeA = backT(a, b, i - 1, j);
+        int removeB = backT(a, b, i, j - 1);
+
+        return mem[i][j] = Math.min(removeA, removeB) + 1;
+
     }
 
     public int helper(String a, String b) {
@@ -58,9 +59,54 @@ public class q583 {
         }
     }
 
-    public int memDp(String a, String b, int m, int n, int[][] mem) {
 
-        return -1;
+    public int backT(String a, String b, int i, int j) {
+
+        if (i == -1)
+            return j + 1;
+
+        if (j == -1)
+            return i + 1;
+
+        if (a.charAt(i) == b.charAt(j))
+            return backT(a, b, i - 1, j - 1);
+
+        int removeA = backT(a, b, i - 1, j);
+        int removeB = backT(a, b, i, j - 1);
+        return Math.min(removeA, removeB) + 1;
+    }
+
+
+    public int dp(String a, String b) {
+
+        int n = a.length();
+        int m = b.length();
+        int[][] dp = new int[n + 1][m + 1];
+
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = i;
+        }
+
+        for (int i = 0; i <= m; i++) {
+            dp[0][i] = i;
+        }
+            /*        t  e  a
+                   0  1  2  3
+                 e 1  2  1  2
+                 a 2  3  2  2
+                 c 3  4  3  2
+             */
+
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= m; j++) {
+                if (a.charAt(i - 1) == b.charAt(j - 1))
+                    dp[i][j] = dp[i - 1][j - 1];
+                else {
+                    dp[i][j] = Math.min(dp[i][j - 1], dp[i - 1][j]) + 1;
+                }
+            }
+
+        return dp[n][m];
     }
 
 }

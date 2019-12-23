@@ -121,6 +121,7 @@ public class q4 {
             queue.add(ibox);
         }
 
+        // it must be traversed level by level
         while (!queue.isEmpty()) {
             boolean allboxesclosed = true;
             int size = queue.size();
