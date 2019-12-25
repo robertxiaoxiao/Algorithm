@@ -22,6 +22,41 @@ public class q1125 {
         }
     }
 
+    public int[] smallestSufficientTeamUsinghashmap(String[] req_skills, List<List<String>> people) {
+        int n = req_skills.length;
+        int m = people.size();
+        int[] peopleCompress = new int[m];
+        for (int i = 0; i < peopleCompress.length; i++)
+            peopleCompress[i] = compress(people.get(i), req_skills);
+
+        HashMap<Integer, List<Integer>> hm = new HashMap<>();
+        hm.put(0, new LinkedList<>());
+
+        for (int i = 1; i <= m; i++) {
+
+            int k = peopleCompress[i - 1];
+            // temp : dp[i]
+            //  hm : dp[i-1]
+            HashMap<Integer, List<Integer>> temp = new HashMap<>(hm);
+            for (int pre : hm.keySet()) {
+                int cur = pre | k;
+                if (temp.get(cur) == null || temp.get(pre).size() + 1 < temp.get(cur).size()) {
+                    temp.put(cur, new LinkedList<>(temp.get(pre)));
+                    temp.get(cur).add(i - 1);
+                }
+            }
+            hm = new HashMap<>(temp);
+        }
+        int endstate = (1 << n) - 1;
+        List<Integer> res = hm.get(endstate);
+        int size = res.size();
+        int[] ans = new int[size];
+        int i = 0;
+        for (int num : res)
+            ans[i++] = num;
+        return ans;
+    }
+
     public int[] smallestSufficientTeam(String[] req_skills, List<List<String>> people) {
 
         int n = req_skills.length;
@@ -79,14 +114,12 @@ public class q1125 {
         for (int i = 0; i < peopleCompress.length; i++)
             peopleCompress[i] = compress(people.get(i), req_skills);
 
-        int[][] dp = new int[m + 1][1 << n];
+        int[] dp = new int[1 << n];
         // HashMap<Integer, List<Integer>> path = new HashMap<>();
         state[] parent = new state[1 << n];
 
-        for (int i = 0; i <= m; i++) {
-            Arrays.fill(dp[i], Integer.MAX_VALUE / 2);
-            dp[i][0] = 0;
-        }
+        Arrays.fill(dp, Integer.MAX_VALUE / 2);
+        dp[0] = 0;
 
         for (int i = 1; i <= m; i++) {
 
@@ -94,22 +127,22 @@ public class q1125 {
             // cost of copying arr is expensive
             // compress ---> O(2^16*60)
             // compress ---->O(2^16*60    copy 2^16)
-            for (int j = (1 << n) - 1; j >= 0; j--)
-                dp[i][j] = dp[i - 1][j];
-
+//            for (int j = (1 << n) - 1; j >= 0; j--)
+//                dp[i][j] = dp[i - 1][j];
+            int[] temp = dp.clone();
             if (k == 0)
                 continue;
             for (int j = (1 << n) - 1; j >= 0; j--) {
-                if (dp[i - 1][j] + 1 < dp[i][j | k] && dp[i - 1][j] + 1 < dp[i - 1][j | k]) {
+                // dp[j] + 1 < temp[j|k] (it may update)
+                if (dp[j] + 1 < temp[j | k] && dp[j] + 1 < dp[j | k]) {
                     {
-                        dp[i][j | k] = dp[i - 1][j] + 1;
+                        temp[j | k] = dp[j] + 1;
                         parent[j | k] = new state(j, i - 1);
                     }
-
                 }
             }
+            dp = temp.clone();
         }
-        print(dp);
         int endstate = (1 << n) - 1;
         List<Integer> res = new LinkedList<>();
         while (endstate > 0) {
