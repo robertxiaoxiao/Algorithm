@@ -4,10 +4,7 @@ package leetcodeTest.Week8;/*
  * @description:
  */
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class q4 {
 
@@ -19,9 +16,12 @@ public class q4 {
 
     public boolean isSolvable(String[] words, String result) {
         hm.clear();
+        Arrays.fill(visited, false);
+        Arrays.fill(canzero, true);
+        Arrays.fill(left, 0);
+        Arrays.fill(right, 0);
+
         int numc = 0;
-        for (int i = 0; i < 26; i++)
-            canzero[i] = true;
         // encode
         for (String word : words) {
             canzero[word.charAt(0) - 'A'] = false;
@@ -30,6 +30,9 @@ public class q4 {
                     hm.put(c, numc++);
         }
         canzero[result.charAt(0) - 'A'] = false;
+        for (char c : result.toCharArray())
+            if (!hm.containsKey(c))
+                hm.put(c, numc++);
 
         for (String word : words)
             calcuateWeight(word, left);
@@ -38,14 +41,14 @@ public class q4 {
     }
 
     public boolean dfs(int cur, int n, int l, int r) {
-
-        if (cur > n) {
+        if (cur >= n) {
             return l == r;
         }
 
         for (int i = 0; i <= 9; i++) {
-            if (canzero[i] && i == 0)
+            if (!canzero[cur] && i == 0)
                 continue;
+
             if (visited[i])
                 continue;
 
@@ -60,7 +63,7 @@ public class q4 {
 
     public void calcuateWeight(String s, int[] arr) {
         int w = 1;
-        for (int i = s.length() - 1; i >= 0; i++) {
+        for (int i = s.length() - 1; i >= 0; i--) {
             arr[hm.get(s.charAt(i))] += w;
             w *= 10;
         }
