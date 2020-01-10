@@ -5,8 +5,8 @@ package LeetCode;/*
  */
 
 public class UninFindSet {
-    static int[] parent;
-    static int[] ranks;
+    int[] parent;
+    int[] ranks;
 
     public UninFindSet(int n) {
         parent = new int[n];
@@ -28,6 +28,11 @@ public class UninFindSet {
             ranks[pk]++;
         }
     }
+    public int findParent(int k) {
+        if (k != parent[k])
+            parent[k] = findParent(parent[k]);
+        return parent[k];
+    }
 
     public void print() {
         for (int i = 0; i < parent.length; i++)
@@ -37,11 +42,13 @@ public class UninFindSet {
             System.out.print(i + " ");
     }
 
-    public int findParent(int k) {
+    //
+    public int findParentUsingstack(int k) {
         int temp = k;
         while (temp != parent[temp]) {
             temp = parent[temp];
         }
+
         // compress path
         while (k != parent[k]) {
             int c = parent[k];
@@ -60,5 +67,4 @@ public class UninFindSet {
         System.out.println(ufs.findParent(0));
         ufs.print();
     }
-
 }
