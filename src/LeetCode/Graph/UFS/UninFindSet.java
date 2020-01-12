@@ -1,4 +1,4 @@
-package LeetCode;/*
+package LeetCode.Graph.UFS;/*
  * @author: Robert
  * @date:  2019/12/17/017
  * @description:
@@ -28,6 +28,7 @@ public class UninFindSet {
             ranks[pk]++;
         }
     }
+
     public int findParent(int k) {
         if (k != parent[k])
             parent[k] = findParent(parent[k]);
@@ -56,15 +57,5 @@ public class UninFindSet {
             k = c;
         }
         return temp;
-    }
-
-    public static void main(String[] args) {
-        int n = 5;
-        UninFindSet ufs = new UninFindSet(5);
-        for (int i = 0; i < 4; i++)
-            ufs.union(i, i + 1);
-        ufs.print();
-        System.out.println(ufs.findParent(0));
-        ufs.print();
     }
 }
