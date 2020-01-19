@@ -24,29 +24,6 @@ public class TravellingSalesmanProblem {
     // path[i][j] : the order in set for the result backtracking
     // i = 10001
 
-    public int TSP() {
-        int n = nodes;
-        int[][] dp = new int[1 << n][n];
-        int[][] path = new int[1 << n][n];
-        int min = Integer.MAX_VALUE;
-        int last = -1;
-        dp[1][0] = 0;
-        // traverse from node 0;
-        // int startKey to go traverse through all nodes just once back to startKey
-        //  dp[0,{1,2,3}] -> dp[1,{2,3}]
-        for (int i = 1; i < (1 << n); i++) {
-            Arrays.fill(dp[i], Integer.MAX_VALUE);
-            for (int j = 1; j < n; j++) {
-                if ((i & (1 << j)) != 0)
-                    continue;
-
-
-            }
-        }
-
-        return -1;
-    }
-
     public int minCostTraverse() {
         int n = nodes;
         int[][] dp = new int[1 << n][n];
@@ -102,25 +79,6 @@ public class TravellingSalesmanProblem {
         }
 
         return min;
-    }
-
-    private boolean curcontainNode(int i, int j) {
-        return (i & (1 << j)) == 0;
-    }
-
-    public static List<Integer> getnodes(int cur) {
-        //   System.out.println(Integer.toBinaryString(cur));
-        List<Integer> res = new LinkedList<>();
-        int temp = cur;
-        int i = 0;
-        while (temp != 0) {
-            if (temp % 2 == 1) {
-                res.add(i);
-            }
-            i++;
-            temp = (temp - temp % 2) / 2;
-        }
-        return res;
     }
 
     public static void main(String[] args) {

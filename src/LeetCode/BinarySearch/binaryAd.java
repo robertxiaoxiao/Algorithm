@@ -11,31 +11,31 @@ public class binaryAd {
     public static int binarySearchLeft(int[] temp, int k) {
         int i = 0;
         int j = temp.length - 1;
-        while (i<=j) {
+        while (i <= j) {
             int mid = i + (j - i) / 2;
-      //      System.out.printf("%d %d %d %d\r\n", i, j, mid, temp[mid]);
-            if (temp[mid] >=k)
-                j = mid-1;
+            //      System.out.printf("%d %d %d %d\r\n", i, j, mid, temp[mid]);
+            if (temp[mid] >= k)
+                j = mid - 1;
             else
                 i = mid + 1;
         }
         return i;
     }
+
     public static int binarySearchRight(int[] temp, int k) {
         int i = 0;
         int j = temp.length - 1;
-        while (i<=j) {
+        while (i <= j) {
             int mid = i + (j - i) / 2;
-          //  System.out.printf("%d %d %d %d\r\n", i, j, mid, temp[mid]);
-            if (temp[mid] >=k)
-                j = mid-1;
+            //  System.out.printf("%d %d %d %d\r\n", i, j, mid, temp[mid]);
+            if (temp[mid] >= k)
+                j = mid - 1;
             else
                 i = mid + 1;
         }
 
         return j;
     }
-
 
     public static int binarySearchUsingWhile(int[] temp, int k) {
         int i = 0;
@@ -58,15 +58,45 @@ public class binaryAd {
         return -1;
     }
 
+    public static int bsFLESSThank(int[] temp, int k) {
+        int l = 0;
+        int r = temp.length;
+        while (l < r) {
+            int mid = l + (r - l) / 2;
+            if (temp[mid] >= k)
+                r = mid;
+            else
+                l = mid + 1;
+        }
+        System.out.printf("the first less than k at index  %d  :%d\r\n ", l, temp[l]);
+        return l;
+    }
+
+    public static int bsLLESSThank(int[] temp, int k) {
+        int l = 0;
+        int r = temp.length;
+        while (l < r) {
+            int mid = l + (r - l) / 2;
+            if (temp[mid] > k)
+                r = mid;
+            else
+                l = mid + 1;
+        }
+        System.out.printf("the last less than k at index  %d  :%d\r\n ", l - 1, temp[l - 1]);
+        return l - 1;
+    }
 
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4, 5, 5, 5, 7, 8, 9, 10, 10, 10, 12};
+        int[] arr = {1, 2, 3, 4, 5, 5, 5, 7, 8, 9, 10, 10, 10, 10};
+        bsFLESSThank(arr, 5);
+        bsLLESSThank(arr, 5);
+        bsFLESSThank(arr, 10);
+        bsLLESSThank(arr, 10);
+        System.out.println();
         // System.out.println(arr.length);
         //  System.out.println(binarySearchUsingWhile(arr, 5));
         //System.out.println(binarySearchUsingWhile(arr, 9));
         //  System.out.println(binarySearchUsingWhile(arr, 10));
         // System.out.println(binarySearchUsingWhile(arr, 5));
-        System.out.println(binarySearchLeft(arr, 5));
-        System.out.println(binarySearchRight(arr, 5));
     }
 }
