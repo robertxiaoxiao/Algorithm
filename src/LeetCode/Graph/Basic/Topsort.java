@@ -31,7 +31,7 @@ public class Topsort {
             //cycle exists;
             return true;
         if (states[cur] == 2)
-            //cycle exists;
+            //cycle NOT  exists;
             return false;
         states[cur] = 1;
         for (int neighbor : graph.get(cur))
