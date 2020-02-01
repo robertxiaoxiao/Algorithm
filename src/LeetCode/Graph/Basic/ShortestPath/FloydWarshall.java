@@ -16,22 +16,23 @@ public class FloydWarshall {
         int[][] dp = new int[n][n];
 
         for (int i = 0; i < n; i++) {
+            // unlinked : -1
             Arrays.fill(dp[i], Integer.MAX_VALUE / 2);
             for (int j = 0; j < n; j++)
                 dp[i][j] = matrix[i][j];
         }
 
-        for (int k = 1; k < n; k++)
+        for (int k = 0; k < n; k++)
             for (int i = 0; i < n; i++)
-                for (int j = 0; j < n; j++){
+                for (int j = 0; j < n; j++) {
                     if (dp[i][k] + dp[k][j] < dp[i][j])
                         dp[i][j] = dp[i][k] + dp[k][j];
-        }
+                }
 
         // Identify negative cycles by propagating the value 'NEGATIVE_INFINITY'
-        for (int k = 1; k < n; k++)
+        for (int k = 0; k < n; k++)
             for (int i = 0; i < n; i++)
-                for (int j = 0; j < n; j++){
+                for (int j = 0; j < n; j++) {
                     if (dp[i][k] + dp[k][j] < dp[i][j])
                         dp[i][j] = Integer.MIN_VALUE;
                 }

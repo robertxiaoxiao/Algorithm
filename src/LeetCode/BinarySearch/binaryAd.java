@@ -7,6 +7,56 @@ package LeetCode.BinarySearch;/*
 
 public class binaryAd {
 
+    /*
+      basic template
+     */
+    public int binaryserach(int[] nums, int l, int r) {
+        int i = l;
+        int j = r;
+        while (i < j) {
+            int mid = (i + j) >> 1;
+            if (g(mid))
+                r = mid;
+            else
+                l = mid + 1;
+        }
+        // g(l)==true ,l is the less
+        // l==r ans not exist
+        return l;
+    }
+
+    // nums[i]>=k
+    public int lower_bound(int[] nums, int k) {
+        int i = 0;
+        int j = nums.length - 1;
+        while (i < j) {
+            int mid = (i + j) / 2;
+            if (nums[mid] >= k)
+                j = mid;
+            else
+                i = mid + 1;
+        }
+        return i;
+    }
+
+    // nums[i]>k
+    public int upper_bound(int[] nums, int k) {
+        int i = 0;
+        int j = nums.length - 1;
+        while (i < j) {
+            int mid = (i + j) / 2;
+            if (nums[mid] > k)
+                j = mid;
+            else
+                i = mid + 1;
+        }
+        return i;
+    }
+
+    public boolean g(int num) {
+        return true;
+    }
+
     //  {1,2,3,4,5,5,5,7,8,9,10,10,10}
     public static int binarySearchLeft(int[] temp, int k) {
         int i = 0;
@@ -19,6 +69,8 @@ public class binaryAd {
             else
                 i = mid + 1;
         }
+
+        // the first one >=k
         return i;
     }
 
@@ -33,7 +85,6 @@ public class binaryAd {
             else
                 i = mid + 1;
         }
-
         return j;
     }
 
@@ -75,7 +126,7 @@ public class binaryAd {
     public static int bsLLESSThank(int[] temp, int k) {
         int l = 0;
         int r = temp.length;
-        while (l < r) {
+        while (l <= r) {
             int mid = l + (r - l) / 2;
             if (temp[mid] > k)
                 r = mid;

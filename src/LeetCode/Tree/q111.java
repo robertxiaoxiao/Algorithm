@@ -5,26 +5,26 @@ import BasicDStructure.Tree.TreeNode;
 public class q111 {
     public int minDepth(TreeNode root) {
 
-         if(root==null)
-             return -1;
+        if (root == null)
+            return 0;
 
-         return helper(root,1);
+        return helper(root, 1);
     }
 
-    public int helper(TreeNode node,int lenth){
+    public int helper(TreeNode node, int lenth) {
 
-        if(node.left==null&&node.right==null)
-            return  lenth;
+        if (node.left == null && node.right == null)
+            return lenth;
 
-        int left=Integer.MAX_VALUE;
-        int right=Integer.MAX_VALUE;
-        if(node.left!=null)
-            left=helper(node.left,lenth+1);
+        int left = Integer.MAX_VALUE;
+        int right = Integer.MAX_VALUE;
+        if (node.left != null)
+            left = helper(node.left, lenth + 1);
 
-        if(node.right!=null)
-            right=helper(node.right,lenth+1);
+        if (node.right != null)
+            right = helper(node.right, lenth + 1);
 
-        return Math.min(left,right);
+        return Math.min(left, right);
 
     }
 

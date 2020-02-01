@@ -22,7 +22,7 @@ public class q107 {
              return result;
          Stack<List<Integer>>  restack=new Stack<>();
          Stack<TreeNode>  stackleft=new Stack<>();
-          Stack<TreeNode>  stackright=new Stack<>();
+         Stack<TreeNode>  stackright=new Stack<>();
          stackleft.add(root);
          TreeNode temp=null;
          while (!stackleft.isEmpty()||!stackright.isEmpty())
@@ -52,7 +52,7 @@ public class q107 {
              result.add(restack.pop());
          return result;
     }
-    /*
+     /*
          recursion solution
      */
 
