@@ -30,26 +30,73 @@ public class BellmanFord {
         // algorithm to complete. Another stopping condition is when we're unable to
         // relax an edge, this means we have reached the optimal solution early.
         boolean relaxedEdge = true;
-        for (int i = 0; i < n && relaxedEdge; i++)
+        for (int i = 0; i < n && relaxedEdge; i++) {
             relaxedEdge = false;
-        for (Edge edge : edges) {
-            if (dist[edge.from] + edge.cost < dist[edge.to]) {
-                dist[edge.to] = dist[edge.from] + edge.cost;
-                relaxedEdge = true;
+            for (Edge edge : edges) {
+                if (dist[edge.from] + edge.cost < dist[edge.to]) {
+                    dist[edge.to] = dist[edge.from] + edge.cost;
+                    relaxedEdge = true;
+                }
             }
         }
+
         //propogate the negative cycles
-        relaxedEdge = true;
-        for (int i = 0; i < n && relaxedEdge; i++)
-            relaxedEdge = false;
         for (Edge edge : edges) {
             //directly in the negative cycle and reachable by negative cycle
             if (dist[edge.from] + edge.cost < dist[edge.to]) {
                 dist[edge.to] = Integer.MIN_VALUE;
-                relaxedEdge = true;
             }
         }
         return dist;
     }
 
+    public boolean getShortestPath(int[] dist, int src, List<Edge> edges, int n) {
+        Arrays.fill(dist, Integer.MAX_VALUE / 2);
+        dist[src] = 0;
+        // Only in the worst case does it take V-1 iterations for the Bellman-Ford
+        // algorithm to complete. Another stopping condition is when we're unable to
+        // relax an edge, this means we have reached the optimal solution early.
+        boolean relaxedEdge = true;
+        for (int i = 0; i < n && relaxedEdge; i++) {
+            relaxedEdge = false;
+            for (Edge edge : edges) {
+                if (dist[edge.from] + edge.cost < dist[edge.to]) {
+                    dist[edge.to] = dist[edge.from] + edge.cost;
+                    relaxedEdge = true;
+                }
+            }
+        }
+
+        //propogate the negative cycles
+        for (Edge edge : edges) {
+            //directly in the negative cycle and reachable by negative cycle
+            if (dist[edge.from] + edge.cost < dist[edge.to]) {
+                dist[edge.to] = Integer.MIN_VALUE;
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    //directed graph sssp(single source shortest path)
+    /*
+         topsort(graph)
+         for(int vertex: g)
+            for(each v: vertex.adjlist)
+                    relax(u,v,w);
+
+        relax  technology :
+            if d[v]<=d[u]+w(u,v)
+               pass
+            else
+               d[v]=d[u]+w(u,v)
+
+
+
+
+
+
+
+     */
 }
