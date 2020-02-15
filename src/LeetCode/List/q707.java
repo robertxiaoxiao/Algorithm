@@ -75,7 +75,7 @@ public class q707 {
             while (cur != null) {
                 if (idx == index) {
                     t.next = pre.next;
-                    pre.next = t;
+                    pre.next =  t;
                     return;
                 }
                 pre = cur;
