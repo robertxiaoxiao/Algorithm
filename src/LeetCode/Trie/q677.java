@@ -39,7 +39,4 @@ public class q677 {
         return hm.getOrDefault(prefix, 0);
     }
 
-    public static void main(String[] args) {
-
-    }
 }

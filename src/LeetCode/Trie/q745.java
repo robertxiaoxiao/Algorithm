@@ -4,10 +4,7 @@ package LeetCode.Trie;/*
  * @description:
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class q745 {
     public q745(String[] words) {
@@ -62,5 +59,9 @@ public class q745 {
             else return p.get(i);
         }
         return -1;
+    }
+
+    public static void main(String[] args) {
+    LinkedList l=new LinkedList();
     }
 }
