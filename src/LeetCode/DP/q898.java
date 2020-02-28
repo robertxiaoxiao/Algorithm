@@ -5,11 +5,14 @@ package LeetCode.DP;/*
  */
 
 import java.util.HashSet;
+import java.util.regex.*;
 
 public class q898 {
 
 
     public int subarrayBitwiseORs(int[] A) {
+
+
         int n = A.length;
         HashSet<Integer> ans = new HashSet<>();
         HashSet<Integer> cur = new HashSet<>();
