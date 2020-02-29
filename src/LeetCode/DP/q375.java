@@ -4,10 +4,6 @@ package LeetCode.DP;/*
  * @description:
  */
 
-import org.w3c.dom.html.HTMLBRElement;
-
-import java.util.Arrays;
-
 public class q375 {
 
     public int getMoneyAmountDP(int n) {

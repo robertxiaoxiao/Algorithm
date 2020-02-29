@@ -7,6 +7,7 @@ package LeetCode.DP;/*
 public class q980 {
 
     static int ans = 0;
+    static int[] dirs = {0, 1, 0, -1, 0};
 
     public int uniquePathsIII(int[][] grid) {
         ans = 0;
@@ -30,8 +31,6 @@ public class q980 {
         dfs(znums, 1, bx, by, tx, ty, grid, visited);
         return ans;
     }
-
-    static int[] dirs = {0, 1, 0, -1, 0};
 
     public void dfs(int tsum, int cur, int cx, int cy, int tx, int ty, int[][] grid, boolean[][] visited) {
         if (cx == tx && cy == ty) {

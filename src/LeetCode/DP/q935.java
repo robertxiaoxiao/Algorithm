@@ -52,15 +52,14 @@ public class q935 {
         int rows = 4;
         int cols = 3;
         List<Integer> res = new LinkedList<>();
-        for(int d=0;d<8;d++)
-        {
-            int nx=x+dirs[d][0];
-            int ny=y+dirs[d][1];
-            if(nx<0||nx>=rows||ny<0||ny>=cols)
+        for (int d = 0; d < 8; d++) {
+            int nx = x + dirs[d][0];
+            int ny = y + dirs[d][1];
+            if (nx < 0 || nx >= rows || ny < 0 || ny >= cols)
                 continue;
-            if(nx==3&&(ny==0||ny==2))
+            if (nx == 3 && (ny == 0 || ny == 2))
                 continue;
-            res.add(nx* 10 + ny);
+            res.add(nx * 10 + ny);
         }
         return res;
     }

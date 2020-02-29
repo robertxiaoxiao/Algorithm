@@ -17,26 +17,25 @@ public class q309 {
 
         //  dp[i][0] =dp[i-1][0]
         // curMin  curMax curCoolDownday
-        int n=prices.length ;
+        int n = prices.length;
 
-        int[]  hold=new int[n+1] ;
-        int[]  rest=new int[n+1] ;
-        int[]  sold=new int[n+1] ;
+        int[] hold = new int[n + 1];
+        int[] rest = new int[n + 1];
+        int[] sold = new int[n + 1];
         /*
           if  i hold : i+1 hold ,sold
           if  i sold : i+1 rest
           if  i rest : i+1 rest hold
          */
-        hold[0]=Integer.MIN_VALUE;
-        rest[0]=0;
-        sold[0]=0;
-        for(int i=1;i<=n;i++)
-        {
-            hold[i]=Math.max(rest[i-1]-prices[i-1],hold[i-1]);
-            rest[i]=Math.max(hold[i-1]+prices[i-1],rest[i-1]);
-            sold[i]=hold[i-1]+prices[i-1];
+        hold[0] = Integer.MIN_VALUE;
+        rest[0] = 0;
+        sold[0] = 0;
+        for (int i = 1; i <= n; i++) {
+            hold[i] = Math.max(rest[i - 1] - prices[i - 1], hold[i - 1]);
+            rest[i] = Math.max(hold[i - 1] + prices[i - 1], rest[i - 1]);
+            sold[i] = hold[i - 1] + prices[i - 1];
         }
-        return  Math.max(rest[n],sold[n]);
+        return Math.max(rest[n], sold[n]);
     }
 
 }

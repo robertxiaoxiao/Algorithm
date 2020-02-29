@@ -43,7 +43,7 @@ public class q871 {
             if (cur >= target)
                 return cnt;
 
-            while (i < stations.length && stations[i][0]<=cur)
+            while (i < stations.length && stations[i][0] <= cur)
                 pq.add(stations[i++]);
 
             if (pq.isEmpty())

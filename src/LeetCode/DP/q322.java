@@ -4,8 +4,6 @@ package LeetCode.DP;/*
  * @description:
  */
 
-import java.util.Arrays;
-
 public class q322 {
 
     public int coinChange(int[] coins, int amount) {
@@ -18,7 +16,7 @@ public class q322 {
         if (amount == 0)
             return 0;
         if (mem[amount] != 0)
-            return   mem[amount];
+            return mem[amount];
         int min = Integer.MAX_VALUE / 2;
         for (int coin : coins) {
             if (amount >= coin)

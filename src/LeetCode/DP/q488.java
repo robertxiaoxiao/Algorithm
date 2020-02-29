@@ -4,17 +4,34 @@ package LeetCode.DP;/*
  * @description:
  */
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.logging.Handler;
 
 public class q488 {
-    static HashMap<Character, Integer> hands=new HashMap<>(); ;
+    static HashMap<Character, Integer> hands = new HashMap<>();
+
+    public static String update(String s) {
+        int n = s.length();
+        char[] chs = s.toCharArray();
+        for (int i = 0; i < n; ) {
+            int j = i + 1;
+            while (j < n && chs[i] == chs[j])
+                j++;
+            if (j - i >= 3)
+                return update(s.substring(0, i) + s.substring(j));
+            i = j;
+        }
+        return s;
+    }
+
+    public static void main(String[] args) {
+        String s = "BBBGGRRYY";
+        System.out.println(update(s));
+    }
 
     public int findMinStep(String board, String hand) {
         hands.clear();
         for (char c : hand.toCharArray())
-                hands.put(c, hands.getOrDefault(c, 0) + 1);
+            hands.put(c, hands.getOrDefault(c, 0) + 1);
         return helper(board);
     }
 
@@ -45,20 +62,6 @@ public class q488 {
         return min == Integer.MAX_VALUE / 2 ? -1 : min;
     }
 
-    public static String update(String s) {
-        int n = s.length();
-        char[] chs = s.toCharArray();
-        for (int i = 0; i < n; ) {
-            int j = i + 1;
-            while (j < n && chs[i] == chs[j])
-                j++;
-            if (j - i >= 3)
-                return update(s.substring(0, i) + s.substring(j));
-            i = j;
-        }
-        return s;
-    }
-
     public String updateUsingtraverse(String board) {
         int i = 0;
         while (i < board.length()) {
@@ -72,10 +75,5 @@ public class q488 {
             }
         }
         return board;
-    }
-
-    public static void main(String[] args) {
-        String s = "BBBGGRRYY";
-        System.out.println(update(s));
     }
 }

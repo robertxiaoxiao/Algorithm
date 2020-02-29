@@ -9,12 +9,13 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class q1 {
+
     static Scanner scanner;
     static int pmax = 1;
 
     public static void main(String[] args) throws FileNotFoundException {
-        scanner = new Scanner(System.in);
 
+        scanner = new Scanner(System.in);
         int caseNum = scanner.nextInt();
         scanner.nextLine();
         HashMap<Integer, int[]> hm = new HashMap<>();
@@ -63,4 +64,5 @@ public class q1 {
         }
         return 1;
     }
+
 }

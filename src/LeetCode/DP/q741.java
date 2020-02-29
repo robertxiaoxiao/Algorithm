@@ -8,12 +8,15 @@ import java.util.HashMap;
 
 public class q741 {
 
+    static int beginstate;
+    static int endstate;
+    static int max = Integer.MIN_VALUE;
+    int[][] fdir = {{0, 1}, {1, 0}};
+    int[][] sdir = {{0, -1}, {-1, 0}};
+
     int getState(int x, int y, int base) {
         return x * base + y;
     }
-
-    static int beginstate;
-    static int endstate;
 
     public int cherryPickup(int[][] grid) {
         int n = grid.length;
@@ -26,10 +29,6 @@ public class q741 {
         dfs(beginstate, begincherry, hm, grid, n, endstate, false);
         return max == Integer.MIN_VALUE ? -1 : max;
     }
-
-    static int max = Integer.MIN_VALUE;
-    int[][] fdir = {{0, 1}, {1, 0}};
-    int[][] sdir = {{0, -1}, {-1, 0}};
 
     public void dfs(int state, int curcurry, HashMap<Integer, Integer> hm, int[][] grid, int base, int target, boolean arrived) {
         int x = state / base;

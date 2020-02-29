@@ -4,11 +4,6 @@ package LeetCode.DP;/*
  * @description:
  */
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.TreeSet;
-
 public class q264 {
 
     public int nthUglyNumber(int n) {

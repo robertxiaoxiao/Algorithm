@@ -15,7 +15,7 @@ public class q906 {
         ret += dfs(low, high, "0");
         ret += dfs(low, high, "1");
         ret += dfs(low, high, "2");
-        return  ret;
+        return ret;
     }
 
     public int dfs(int low, int high, String t) {

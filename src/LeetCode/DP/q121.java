@@ -34,7 +34,7 @@ public class q121 {
         maxProfit[0] = 0;
         for (int i = 1; i <= n; i++) {
             minPrice[i] = Math.min(minPrice[i - 1], prices[i - 1]);
-            maxProfit[i] = Math.max(maxProfit[i - 1], prices[i-1] - minPrice[i]);
+            maxProfit[i] = Math.max(maxProfit[i - 1], prices[i - 1] - minPrice[i]);
         }
         return maxProfit[n];
     }

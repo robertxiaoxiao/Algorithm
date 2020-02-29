@@ -22,7 +22,7 @@ public class Q1301 {
                 if (board.get(i).charAt(j) == 'X' || board.get(i).charAt(j) == 'S')
                     continue;
                 int m = Math.max(dp[i + 1][j + 1], Math.max(dp[i][j + 1], dp[i + 1][j]));
-                dp[i][j] = m + (i + j == 0? 0 : board.get(i).charAt(j) - '0');
+                dp[i][j] = m + (i + j == 0 ? 0 : board.get(i).charAt(j) - '0');
                 if (dp[i + 1][j + 1] == m)
                     path[i][j] = (path[i][j] % mod + path[i + 1][j + 1]) % mod;
                 if (dp[i + 1][j] == m)
@@ -31,8 +31,8 @@ public class Q1301 {
                     path[i][j] = (path[i][j] % mod + path[i][j + 1]) % mod;
             }
 
-        return path[0][0]==0?new int[]{0,0}:new int[]{
-                dp[0][0] , path[0][0]
+        return path[0][0] == 0 ? new int[]{0, 0} : new int[]{
+                dp[0][0], path[0][0]
         };
 
     }

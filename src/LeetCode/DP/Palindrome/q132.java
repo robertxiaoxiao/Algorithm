@@ -4,11 +4,13 @@ package LeetCode.DP.Palindrome;/*
  * @description:
  */
 
-import DynamaicP.DPAlo;
-
 import java.util.Arrays;
 
 public class q132 {
+
+    public static void main(String[] args) {
+        System.out.println(15 * 15 * 15);
+    }
 
     public int minCutON3(String s) {
         //dp[i][j] : [i,j] is substring
@@ -79,10 +81,6 @@ public class q132 {
             }
         }
         return dp[n - 1];
-    }
-
-    public static void main(String[] args) {
-        System.out.println(15 * 15 * 15);
     }
 
 }

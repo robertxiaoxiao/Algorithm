@@ -10,14 +10,14 @@ import java.util.Queue;
 
 public class q818 {
 
+    static int Maxket = 10000;
+    static int[][] dp = new int[Maxket + 1][2];
+
     public int racecar(int target) {
 
         int[] mem = new int[target + 1];
         return memDp(target, mem);
     }
-
-    static int Maxket = 10000;
-    static int[][] dp = new int[Maxket + 1][2];
 
     public int racecarUsingDP(int target) {
         if (dp[target][0] == 0) {

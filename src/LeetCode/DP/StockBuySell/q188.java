@@ -4,9 +4,10 @@ package LeetCode.DP.StockBuySell;/*
  * @description:
  */
 
-import java.util.Arrays;
-
 public class q188 {
+
+    // dp[n][k][buy] :the most profit at n days with at most k transaction
+    static Integer[][][] dp;
 
     public int maxProfitTOL(int k, int[] prices) {
         int n = prices.length;
@@ -44,9 +45,6 @@ public class q188 {
         }
         return maxprofit;
     }
-
-    // dp[n][k][buy] :the most profit at n days with at most k transaction
-    static Integer[][][] dp;
 
     public int maxProfit(int k, int[] prices) {
         int n = prices.length;

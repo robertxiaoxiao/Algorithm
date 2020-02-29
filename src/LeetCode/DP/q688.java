@@ -23,7 +23,7 @@ public class q688 {
         double[][][] mem = new double[N][N][K + 1];
         double target = helper(0, K, N, r, c, mem);
 
-        return (double) target;
+        return target;
     }
 
     public double helper(int cursteps, int k, int n, int r, int c, double[][][] mem) {

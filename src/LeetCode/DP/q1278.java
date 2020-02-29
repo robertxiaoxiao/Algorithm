@@ -4,40 +4,7 @@ package LeetCode.DP;/*
  * @description:
  */
 
-import StringPatternMatch.KMP;
-
 public class q1278 {
-    public int palindromePartitionPre(String s, int k) {
-
-        int n = s.length();
-        int[][] dp = new int[n + 1][k + 1];
-        for (int i = 1; i <= n; i++)
-            dp[i][1] = changeString(s, 0, i);
-
-        for (int i = 2; i <= n; i++)
-            for (int j = 2; j <= k; j++) {
-                dp[i][j] = dp[i - 1][j - 1];
-                for (int m = j - 1; m <= i - 2; m++)
-                    dp[i][j] = Math.min(dp[i][j], dp[m][j - 1] + changeString(s, m, i));
-            }
-        return dp[n][k];
-    }
-
-    private int changeString(String s, int beginIndex, int endIndex) {
-        String temp = s.substring(beginIndex, endIndex);
-        int n = temp.length();
-        int left = 0;
-        int right = n - 1;
-        int ans = 0;
-        while (left <= right) {
-            if (temp.charAt(left) != temp.charAt(right))
-                ans++;
-            left++;
-            right--;
-        }
-        return ans;
-    }
-
     public static void print(String s) {
         int n = s.length();
         int[][] cost = new int[n][n];
@@ -69,6 +36,37 @@ public class q1278 {
 
         print("abcdef");
 
+    }
+
+    public int palindromePartitionPre(String s, int k) {
+
+        int n = s.length();
+        int[][] dp = new int[n + 1][k + 1];
+        for (int i = 1; i <= n; i++)
+            dp[i][1] = changeString(s, 0, i);
+
+        for (int i = 2; i <= n; i++)
+            for (int j = 2; j <= k; j++) {
+                dp[i][j] = dp[i - 1][j - 1];
+                for (int m = j - 1; m <= i - 2; m++)
+                    dp[i][j] = Math.min(dp[i][j], dp[m][j - 1] + changeString(s, m, i));
+            }
+        return dp[n][k];
+    }
+
+    private int changeString(String s, int beginIndex, int endIndex) {
+        String temp = s.substring(beginIndex, endIndex);
+        int n = temp.length();
+        int left = 0;
+        int right = n - 1;
+        int ans = 0;
+        while (left <= right) {
+            if (temp.charAt(left) != temp.charAt(right))
+                ans++;
+            left++;
+            right--;
+        }
+        return ans;
     }
 
     public int palindromePartition(String s, int k) {

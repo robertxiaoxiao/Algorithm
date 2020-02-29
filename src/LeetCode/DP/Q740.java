@@ -4,11 +4,6 @@ package LeetCode.DP;/*
  * @description:
  */
 
-import org.apache.coyote.Adapter;
-
-import java.util.HashMap;
-import java.util.HashSet;
-
 public class Q740 {
 
     public int deleteAndEarn(int[] nums) {

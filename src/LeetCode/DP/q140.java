@@ -19,7 +19,7 @@ public class q140 {
     public List<String> memDp(String s, List<String> wordDict, HashMap<String, List<String>> hm) {
         List<String> res = new LinkedList<>();
         if (s.length() == 0) {
-            res.add(new String(""));
+            res.add("");
             hm.put("", res);
             return res;
         }
@@ -51,7 +51,7 @@ public class q140 {
 
         List<String> res = new LinkedList<>();
         if (s.length() == 0) {
-            res.add(new String(""));
+            res.add("");
             return res;
         }
         for (String word : wordDict) {

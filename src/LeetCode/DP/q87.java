@@ -4,12 +4,6 @@ package LeetCode.DP;/*
  * @description:
  */
 
-import LeetCode.Tree.BST.TreeNode;
-
-import javax.print.attribute.standard.ReferenceUriSchemesSupported;
-import java.util.LinkedList;
-import java.util.List;
-
 public class q87 {
 
     public boolean isScrambleDpSelf(String s1, String s2) {

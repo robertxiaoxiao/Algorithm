@@ -38,6 +38,12 @@ public class q790 {
         return A[N] % MOD;
     }
 
+    public static void main(String[] args) {
+        System.out.println(MOD);
+        System.out.println(numTilings(30));
+        System.out.println(MOD);
+    }
+
     public int numTilingsCompress(int N) {
         //dp1  end with x
         //              x
@@ -63,12 +69,6 @@ public class q790 {
             firB = nextB;
         }
         return secA;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(MOD);
-        System.out.println(numTilings(30));
-        System.out.println(MOD);
     }
 
 }

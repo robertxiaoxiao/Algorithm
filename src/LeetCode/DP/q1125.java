@@ -12,16 +12,6 @@ import java.util.List;
 
 public class q1125 {
 
-    static class state {
-        int pre;
-        int ps;
-
-        public state(int cur, int ps) {
-            this.pre = cur;
-            this.ps = ps;
-        }
-    }
-
     public int[] smallestSufficientTeamUsinghashmap(String[] req_skills, List<List<String>> people) {
         int n = req_skills.length;
         int m = people.size();
@@ -184,5 +174,15 @@ public class q1125 {
             if (req_skills[i].equalsIgnoreCase(s))
                 return i;
         return -1;
+    }
+
+    static class state {
+        int pre;
+        int ps;
+
+        public state(int cur, int ps) {
+            this.pre = cur;
+            this.ps = ps;
+        }
     }
 }

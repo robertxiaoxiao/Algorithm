@@ -9,6 +9,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class q368 {
+    public static void main(String[] args) {
+
+    }
+
     public List<Integer> largestDivisibleSubset(int[] nums) {
         int n = nums.length;
         List<Integer>[] dp = new List[n];
@@ -81,11 +85,6 @@ public class q368 {
                 return false;
         }
         return true;
-    }
-
-
-    public static void main(String[] args) {
-
     }
 
 }

@@ -7,6 +7,12 @@ package LeetCode.DP;/*
 public class q801 {
 
 
+    public static void swap(int[] A, int[] B, int i) {
+        int temp = A[i];
+        A[i] = B[i];
+        B[i] = temp;
+    }
+
     public int minSwap(int[] a, int[] b) {
 
         // dp[i] : the min steps to swap to meet the constrains
@@ -74,7 +80,6 @@ public class q801 {
         return Math.min(keeps, swaps);
     }
 
-
     public int helper(int[] a, int[] b, int begin) {
 
         if (begin == a.length)
@@ -91,11 +96,5 @@ public class q801 {
             mustswap = helper(a, b, begin + 1) + 1;
         }
         return Math.min(mustswap, Math.min(notswaped, swaped));
-    }
-
-    public static void swap(int[] A, int[] B, int i) {
-        int temp = A[i];
-        A[i] = B[i];
-        B[i] = temp;
     }
 }

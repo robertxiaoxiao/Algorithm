@@ -4,7 +4,6 @@ package LeetCode.DP;/*
  * @description:
  */
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class q494 {
@@ -21,7 +20,7 @@ public class q494 {
         int n = nums.length;
         HashMap<Integer, Integer> hm = new HashMap<>();
         hm.put(nums[0], 1);
-        hm.put(-nums[0], hm.getOrDefault(-nums[0],0)+1);
+        hm.put(-nums[0], hm.getOrDefault(-nums[0], 0) + 1);
         for (int i = 2; i <= n; i++) {
             HashMap<Integer, Integer> next = new HashMap<>();
             for (int k : hm.keySet()) {
