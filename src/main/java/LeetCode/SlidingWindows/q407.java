@@ -1,8 +1,10 @@
 package LeetCode.SlidingWindows;
 
+import java.util.PriorityQueue;
+
 public class q407 {
 
-    public int trapRainWater(int[][] heightMap) {
+    public int trapRainWaterError(int[][] heightMap) {
         int n = heightMap.length;
         int m = heightMap[0].length;
         int[][] up = new int[n][m];
@@ -43,7 +45,6 @@ public class q407 {
         }
 
         return ans;
-
         /*
         for (int i = 0; i < n; i++) {
             Stack<Integer> stack = new Stack<>();
@@ -111,7 +112,6 @@ public class q407 {
         }
         */
 
-
 //        int ans = 0;
 //        for (int i = 0; i < n; i++) {
 //            for (int j = 0; j < m; j++) {
@@ -129,5 +129,48 @@ public class q407 {
 //            }
 //        }
 //        return ans;
+    }
+
+    int[] dx = {0, 1, 0, -1};
+    int[] dy = {1, 0, -1, 0};
+
+    public int trapRainWater(int[][] heightMap) {
+
+        // ascending order by heights
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        int n = heightMap.length;
+        int m = heightMap[0].length;
+        boolean[][] visited = new boolean[n][m];
+
+        for (int i = 0; i < m; i++) {
+            visited[0][i] = true;
+            visited[n - 1][i] = true;
+            pq.add(new int[]{heightMap[0][i], 0, i});
+            pq.add(new int[]{heightMap[n - 1][i], n - 1, i});
+        }
+        for (int i = 0; i < n; i++) {
+            visited[i][0] = true;
+            visited[i][m - 1] = true;
+            pq.add(new int[]{heightMap[i][0], i, 0});
+            pq.add(new int[]{heightMap[i][m - 1], i, m - 1});
+        }
+        int ans = 0;
+        while (!pq.isEmpty()) {
+            int[] cur = pq.poll();
+            int cx = cur[1];
+            int cy = cur[2];
+            int curheight = cur[0];
+            for (int i = 0; i < 4; i++) {
+                int nx = cx + dx[i];
+                int ny = cy + dy[i];
+                if (nx < 0 || nx >= n || ny < 0 || ny >= m || visited[nx][ny])
+                    continue;
+                visited[nx][ny] = true;
+                ans += Math.max(0, curheight - heightMap[nx][ny]);
+                pq.add(new int[]{Math.max(curheight, heightMap[nx][ny]), nx, ny});
+            }
+        }
+
+        return ans;
     }
 }

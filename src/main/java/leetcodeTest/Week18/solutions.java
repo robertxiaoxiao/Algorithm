@@ -223,13 +223,14 @@ public class solutions {
         }
     }
 
-   // standard dfs
-   class Solution {
+    // standard dfs
+    class Solution {
         LinkedList<Integer> adjListArray[];
+
         public double frogPosition(int n, int[][] edges, int t, int target) {
             if (n == 1) return 1.0;
             adjListArray = new LinkedList[n + 1];
-            for(int i = 0; i <= n ; i++) adjListArray[i] = new LinkedList<>();
+            for (int i = 0; i <= n; i++) adjListArray[i] = new LinkedList<>();
             for (int[] edge : edges) {
                 adjListArray[edge[0]].add(edge[1]);
                 adjListArray[edge[1]].add(edge[0]);
