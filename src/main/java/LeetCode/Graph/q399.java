@@ -4,11 +4,9 @@ package LeetCode.Graph;/*
  * @description:
  */
 
-import javax.xml.stream.events.EntityDeclaration;
 import java.util.*;
 
 public class q399 {
-
 
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
         HashMap<String, List<edge>> graph = new HashMap<>();

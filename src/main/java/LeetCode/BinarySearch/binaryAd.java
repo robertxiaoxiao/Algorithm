@@ -28,7 +28,7 @@ public class binaryAd {
     // nums[i]>=k
     public int lower_bound(int[] nums, int k) {
         int i = 0;
-        int j = nums.length - 1;
+        int j = nums.length;
         while (i < j) {
             int mid = (i + j) / 2;
             if (nums[mid] >= k)
@@ -42,7 +42,7 @@ public class binaryAd {
     // nums[i]>k
     public int upper_bound(int[] nums, int k) {
         int i = 0;
-        int j = nums.length - 1;
+        int j = nums.length;
         while (i < j) {
             int mid = (i + j) / 2;
             if (nums[mid] > k)
