@@ -43,5 +43,40 @@ public class q74 {
         return false;
     }
 
+    public boolean searchMatrixUsingInterval(int[][] matrix, int target) {
+        int n = matrix.length;
+        if (n == 0)
+            return false;
+        int m = matrix[0].length;
+        if (m == 0)
+            return false;
+
+        int l = 0;
+        int r = n;
+        while (l < r) {
+            int mid = l + r >> 1;
+            if (matrix[mid][0] == target)
+                return true;
+
+            if (matrix[mid][0] > target)
+                r = mid;
+            else
+                l = mid + 1;
+        }
+
+        if (l == 0)
+            return false;
+        int t = l - 1;
+        l = 0;
+        r = m;
+        while (l < r) {
+            int mid = l + r >> 1;
+            if (matrix[t][mid] >= target)
+                r = mid;
+            else
+                l = mid + 1;
+        }
+        return l != m && matrix[t][l] == target;
+    }
 
 }

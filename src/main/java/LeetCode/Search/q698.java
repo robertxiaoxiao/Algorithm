@@ -12,7 +12,6 @@ import java.util.List;
 
 public class q698 {
 
-
     public boolean canPartitionKSubsets(int[] nums, int k) {
         int n = nums.length;
         int sum = 0;
