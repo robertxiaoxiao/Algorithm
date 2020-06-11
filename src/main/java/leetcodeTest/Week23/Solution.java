@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Solution {
 
-
     public List<String> stringMatching(String[] words) {
         HashSet<String> ans = new HashSet<>();
         int n = words.length;

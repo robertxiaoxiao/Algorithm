@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+  <component name="Encoding">
+    <file url="file://F:/JavaBenchGraduation/hadoopPj/FileTransfer/src/main/java" charset="UTF-8" />
+    <file url="file://F:/JavaBenchGraduation/hadoopPj/FileTransfer/src/main/resources" charset="UTF-8" />
+    <file url="file://F:/JavaBenchGraduation/hadoopPj/JarUtil/src/main/java" charset="UTF-8" />
+    <file url="file://F:/JavaBenchGraduation/hadoopPj/JarUtil/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

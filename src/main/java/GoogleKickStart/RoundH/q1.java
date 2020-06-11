@@ -14,7 +14,6 @@ public class q1 {
     static int pmax = 1;
 
     public static void main(String[] args) throws FileNotFoundException {
-
         scanner = new Scanner(System.in);
         int caseNum = scanner.nextInt();
         scanner.nextLine();

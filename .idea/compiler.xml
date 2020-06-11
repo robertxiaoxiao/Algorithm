@@ -17,11 +17,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Algorithm" />
+        <module name="FileTransfer" />
+        <module name="HelloWorldJar" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11">
       <module name="Algorithm" target="11" />
-      <module name="robert" target="1.5" />
+      <module name="FileTransfer" target="1.8" />
+      <module name="hadoopPj" target="1.5" />
+      <module name="HelloWorldJar" target="10" />
     </bytecodeTargetLevel>
   </component>
 </project>

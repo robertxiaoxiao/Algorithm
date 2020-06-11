@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Algorithm.iml" filepath="$PROJECT_DIR$/Algorithm.iml" />
+      <module fileurl="file://F:/JavaBenchGraduation/hadoopPj/FileTransfer/FileTransfer.iml" filepath="F:/JavaBenchGraduation/hadoopPj/FileTransfer/FileTransfer.iml" />
+      <module fileurl="file://F:/JavaBenchGraduation/hadoopPj/JarUtil/HelloWorldJar.iml" filepath="F:/JavaBenchGraduation/hadoopPj/JarUtil/HelloWorldJar.iml" />
+      <module fileurl="file://F:/JavaBenchGraduation/hadoopPj/hadoopPj.iml" filepath="F:/JavaBenchGraduation/hadoopPj/hadoopPj.iml" />
     </modules>
   </component>
 </project>

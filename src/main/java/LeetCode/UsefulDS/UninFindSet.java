@@ -5,6 +5,7 @@ package LeetCode.UsefulDS;/*
  */
 
 public class UninFindSet {
+
     int[] parent;
     int[] ranks;
 
@@ -30,20 +31,12 @@ public class UninFindSet {
     }
 
     public int findParent(int k) {
+
         if (k != parent[k])
             parent[k] = findParent(parent[k]);
         return parent[k];
     }
 
-    public void print() {
-        for (int i = 0; i < parent.length; i++)
-            System.out.print(parent[i] + " ");
-        System.out.println();
-        for (int i = 0; i < parent.length; i++)
-            System.out.print(i + " ");
-    }
-
-    //
     public int findParentUsingstack(int k) {
         int temp = k;
         while (temp != parent[temp]) {
